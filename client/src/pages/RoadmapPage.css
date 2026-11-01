@@ -1,14 +1,16 @@
 /* ═══════════════════════════════════════════════════════════════
-   OpsAcademy Dedicated Roadmap Page Styles
+   OpsAcademy Dedicated Roadmap Page Styles — Engineered Tech Theme
    ═══════════════════════════════════════════════════════════════ */
 
 .roadmap-page {
   padding: 32px 0 80px;
   min-height: calc(100vh - 64px);
+  background: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .roadmap-page .container {
-  max-width: 1400px;
+  max-width: 1360px;
   padding: 0 32px;
 }
 
@@ -16,10 +18,13 @@
 
 .roadmap-hero-banner {
   padding: 2.5rem;
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.9) 100%);
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  background: 
+    radial-gradient(ellipse at 80% 0%, rgba(16, 185, 129, 0.22), transparent 70%),
+    radial-gradient(circle at 10% 90%, rgba(190, 242, 100, 0.08), transparent 60%),
+    linear-gradient(180deg, #0d1e18 0%, #091410 100%);
+  border: 1px solid rgba(134, 239, 172, 0.2);
   border-radius: 24px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,16 +37,18 @@
 .roadmap-hero-banner::before {
   content: '';
   position: absolute;
-  top: -50%;
-  right: -20%;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, rgba(124, 58, 237, 0.1) 50%, transparent 70%);
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 70% 60% at 50% 0%, rgba(16, 185, 129, 0.16), transparent 70%),
+    radial-gradient(ellipse 50% 50% at 85% 50%, rgba(56, 189, 248, 0.10), transparent 65%);
   pointer-events: none;
+  z-index: 0;
 }
 
 .hero-banner-content {
   max-width: 800px;
+  position: relative;
+  z-index: 1;
 }
 
 .banner-badge {
@@ -49,12 +56,12 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.35rem 0.85rem;
-  background: rgba(0, 212, 255, 0.12);
-  border: 1px solid rgba(0, 212, 255, 0.3);
-  border-radius: 100px;
-  color: #00d4ff;
+  background: rgba(190, 242, 100, 0.14);
+  border: 1px solid rgba(190, 242, 100, 0.4);
+  border-radius: 9999px;
+  color: #bef264;
   font-size: 0.78rem;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 1rem;
@@ -63,14 +70,14 @@
 .banner-title {
   font-size: 2.3rem;
   font-weight: 900;
-  color: #fff;
+  color: #f2fde2;
   line-height: 1.25;
   margin: 0 0 0.8rem 0;
   letter-spacing: -0.5px;
 }
 
 .banner-subtitle {
-  color: var(--text-secondary, #94a3b8);
+  color: #c0ded0;
   font-size: 1.05rem;
   line-height: 1.6;
   margin: 0 0 1.5rem 0;
@@ -87,20 +94,22 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
-  background: rgba(15, 23, 42, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 100px;
-  color: #e2e8f0;
+  background: rgba(14, 30, 22, 0.85);
+  border: 1px solid rgba(134, 239, 172, 0.22);
+  border-radius: 9999px;
+  color: #f1f7f4;
   font-size: 0.85rem;
   font-weight: 600;
 }
 
-.text-cyan { color: #00d4ff; }
-.text-green { color: #34d399; }
+.text-cyan { color: #38bdf8; }
+.text-green { color: #4ade80; }
 .text-purple { color: #c084fc; }
 
 .hero-banner-action {
   flex-shrink: 0;
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 900px) {

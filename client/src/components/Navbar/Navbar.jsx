@@ -41,13 +41,18 @@ export default function Navbar() {
   const isActive = (path) => location.pathname === path ? 'active' : '';
   const engine = engineLabel(stats);
 
+  // The landing page has its own framed architectural header matching the hero design
+  if (location.pathname === '/') {
+    return null;
+  }
+
   return (
     <nav className="navbar">
       <div className="navbar-inner">
         {/* Brand */}
         <Link to="/" className="navbar-brand">
           <div className="navbar-logo">
-            <Terminal size={18} />
+            <span className="navbar-logo-prompt">&gt;_</span>
           </div>
           <div className="navbar-brand-text">
             Ops<span>Academy</span>
@@ -70,7 +75,7 @@ export default function Navbar() {
           </li>
           <li>
             <Link to="/casestudies" className={`navbar-link ${isActive('/casestudies')}`}>
-              <Sparkles size={16} className="text-cyan" />
+              <Sparkles size={16} className="text-lime" />
               <span>Case Studies</span>
             </Link>
           </li>

@@ -1,11 +1,15 @@
+/* ═══════════════════════════════════════════════════════════════
+   Terminal Component Styles — Engineered Tech Theme
+   ═══════════════════════════════════════════════════════════════ */
+
 .terminal-container {
   display: flex;
   flex-direction: column;
   height: 100%;
-  border-radius: var(--radius-lg);
+  border-radius: 14px;
   overflow: hidden;
-  border: 1px solid var(--border-subtle);
-  background: #0d1117;
+  border: 1px solid rgba(134, 239, 172, 0.18);
+  background: #07100c;
   box-shadow: var(--shadow-lg);
 }
 
@@ -14,8 +18,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 16px;
-  background: rgba(13, 17, 23, 0.95);
-  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(11, 24, 19, 0.98);
+  border-bottom: 1px solid rgba(134, 239, 172, 0.14);
 }
 
 .terminal-header-left {
@@ -34,9 +38,9 @@
   height: 10px;
   border-radius: 50%;
 }
-.terminal-dot.red { background: #ff5f56; }
-.terminal-dot.yellow { background: #ffbd2e; }
-.terminal-dot.green { background: #27c93f; }
+.terminal-dot.red { background: #f87171; }
+.terminal-dot.yellow { background: #fbbf24; }
+.terminal-dot.green { background: #4ade80; }
 
 .terminal-title {
   display: flex;
@@ -44,7 +48,12 @@
   gap: 6px;
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  color: var(--text-muted);
+  color: #c0ded0;
+  font-weight: 600;
+}
+
+.terminal-title svg {
+  color: #bef264;
 }
 
 .terminal-header-right {
@@ -57,28 +66,28 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 0.7rem;
-  font-weight: 500;
+  font-size: 0.72rem;
+  font-weight: 700;
   padding: 3px 10px;
-  border-radius: 20px;
+  border-radius: 9999px;
 }
 
 .terminal-status.connected {
-  color: var(--accent-green);
-  background: var(--accent-green-dim);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: #86efac;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(74, 222, 128, 0.35);
 }
 
 .terminal-status.disconnected {
-  color: var(--accent-red);
-  background: var(--accent-red-dim);
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  background: rgba(248, 113, 113, 0.15);
+  border: 1px solid rgba(248, 113, 113, 0.35);
 }
 
 .terminal-status.connecting {
-  color: var(--accent-orange);
-  background: var(--accent-orange-dim);
-  border: 1px solid rgba(245, 158, 11, 0.2);
+  color: #fde047;
+  background: rgba(251, 191, 36, 0.15);
+  border: 1px solid rgba(251, 191, 36, 0.35);
 }
 
 .terminal-status-dot {
@@ -97,6 +106,7 @@
   padding: 8px;
   min-height: 0;
   position: relative;
+  background: #07100c;
 }
 
 .terminal-body .xterm {
@@ -111,7 +121,7 @@
 .terminal-loading {
   position: absolute;
   inset: 0;
-  background: #0d1117;
+  background: #07100c;
   z-index: 10;
   display: flex;
   flex-direction: column;
@@ -124,8 +134,8 @@
 .terminal-loading-spinner {
   width: 32px;
   height: 32px;
-  border: 3px solid var(--border-subtle);
-  border-top-color: var(--accent-cyan);
+  border: 3px solid rgba(134, 239, 172, 0.18);
+  border-top-color: #bef264;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -136,6 +146,6 @@
 
 /* Terminal glow effect */
 .terminal-container:focus-within {
-  border-color: var(--border-accent);
-  box-shadow: var(--shadow-glow-cyan);
+  border-color: rgba(190, 242, 100, 0.45);
+  box-shadow: 0 0 24px rgba(190, 242, 100, 0.2);
 }

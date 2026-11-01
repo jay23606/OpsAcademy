@@ -396,7 +396,7 @@ npm run e2e                               # real browser against a throwaway sta
 | Docker | a critical, fixable vulnerability in any of the four images (Trivy), a sandbox break-out check, a lab step that cannot be done or passes without work (all 89, in a real container), the simulator tests inside the hardened container, the end-to-end journey |
 | Deploy | runs only on `main`, only after every job above passed |
 
-`codeql.yml` adds weekly and per-change code scanning for the JavaScript and Python source, and `dependabot.yml` opens weekly pull requests for outdated packages, base images and the pinned actions. Every third-party action is pinned to a commit hash.
+`codeql.yml` adds weekly and per-change code scanning for the JavaScript and Python source. Every third-party action is pinned to a commit hash.
 
 Two honest notes. Most of this was added after the workflow last ran on GitHub, so until the first green run it is checked only by a workflow linter (`actionlint`) and by running the same commands locally. And the deploy job does nothing until you give it deploy hooks (see [Deploying](#deploying)); until then Render and Vercel still deploy every push on their own.
 

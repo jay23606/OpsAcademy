@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   Lab Page Styles — Split Pane Layout
+   Lab Page Styles — Split Pane Layout — Engineered Tech Theme
    ═══════════════════════════════════════════════════════════════ */
 
 .lab-page {
@@ -7,6 +7,8 @@
   flex-direction: column;
   height: calc(100vh - 64px);
   overflow: hidden;
+  background: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 /* ── Header ───────────────────────────────────────────────── */
@@ -15,9 +17,10 @@
   align-items: center;
   justify-content: space-between;
   padding: 12px 24px;
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(11, 24, 19, 0.95);
+  border-bottom: 1px solid rgba(134, 239, 172, 0.14);
   flex-shrink: 0;
+  backdrop-filter: blur(12px);
 }
 
 .lab-header-left {
@@ -33,9 +36,9 @@
 }
 
 .lab-title {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--text-bright);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #f2fde2;
   line-height: 1.2;
 }
 
@@ -49,8 +52,9 @@
   display: flex;
   align-items: center;
   gap: 4px;
-  font-size: 0.72rem;
-  color: var(--text-muted);
+  font-size: 0.74rem;
+  color: #7a998b;
+  font-weight: 600;
 }
 
 .lab-header-right {
@@ -65,14 +69,13 @@
   gap: 6px;
   font-family: var(--font-mono);
   font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--accent-cyan);
+  font-weight: 700;
+  color: #bef264;
   padding: 6px 14px;
-  border-radius: var(--radius-sm);
-  background: var(--accent-cyan-dim);
-  border: 1px solid rgba(0, 212, 255, 0.15);
+  border-radius: 9999px;
+  background: rgba(190, 242, 100, 0.12);
+  border: 1px solid rgba(190, 242, 100, 0.35);
 }
-
 
 /* ── Workspace Split Pane ─────────────────────────────────── */
 .lab-workspace {
@@ -90,8 +93,8 @@
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  background: var(--bg-secondary);
-  border-right: 1px solid var(--border-subtle);
+  background: rgba(11, 24, 19, 0.95);
+  border-right: 1px solid rgba(134, 239, 172, 0.14);
   overflow: hidden;
 }
 
@@ -100,21 +103,23 @@
   align-items: center;
   justify-content: space-between;
   padding: 16px 20px;
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: 1px solid rgba(134, 239, 172, 0.14);
 }
 
 .instructions-header h2 {
   font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--text-bright);
+  font-weight: 800;
+  color: #f2fde2;
 }
 
 .instructions-count {
-  font-size: 0.72rem;
-  color: var(--text-muted);
-  padding: 2px 10px;
-  border-radius: 20px;
-  background: var(--bg-tertiary);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #86efac;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(74, 222, 128, 0.3);
 }
 
 .instructions-list {
@@ -124,20 +129,21 @@
 }
 
 .instruction-item {
-  border-radius: var(--radius-md);
+  border-radius: 12px;
   margin-bottom: 8px;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid rgba(134, 239, 172, 0.14);
   overflow: hidden;
-  transition: border-color var(--transition-fast);
+  transition: all var(--transition-fast);
+  background: rgba(14, 30, 22, 0.4);
 }
 
 .instruction-item:hover {
-  border-color: rgba(148, 163, 184, 0.2);
+  border-color: rgba(190, 242, 100, 0.3);
 }
 
 .instruction-item.expanded {
-  border-color: var(--border-accent);
-  background: rgba(0, 212, 255, 0.02);
+  border-color: rgba(190, 242, 100, 0.45);
+  background: rgba(190, 242, 100, 0.04);
 }
 
 .instruction-header-btn {
@@ -157,7 +163,7 @@
 }
 
 .instruction-header-btn svg {
-  color: var(--text-muted);
+  color: #7a998b;
   flex-shrink: 0;
   margin-left: auto;
 }
@@ -166,25 +172,25 @@
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--accent-cyan-dim);
-  color: var(--accent-cyan);
+  background: rgba(190, 242, 100, 0.15);
+  color: #bef264;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.7rem;
-  font-weight: 700;
+  font-size: 0.72rem;
+  font-weight: 800;
   flex-shrink: 0;
-  border: 1px solid rgba(0, 212, 255, 0.2);
+  border: 1px solid rgba(190, 242, 100, 0.35);
 }
 
 .instruction-step-badge.verified {
   background: rgba(16, 185, 129, 0.2);
-  color: #10b981;
-  border-color: rgba(16, 185, 129, 0.4);
+  color: #86efac;
+  border-color: rgba(74, 222, 128, 0.4);
 }
 
 .instruction-item.step-verified {
-  border-color: rgba(16, 185, 129, 0.3);
+  border-color: rgba(74, 222, 128, 0.3);
 }
 
 .step-actions-row {
@@ -195,18 +201,13 @@
 }
 
 .btn-xs {
-  padding: 4px 10px;
-  font-size: 0.72rem;
-  border-radius: 4px;
+  padding: 4px 12px;
+  font-size: 0.74rem;
+  border-radius: 9999px;
 }
 
-.mt-2 {
-  margin-top: 8px;
-}
-
-.mb-2 {
-  margin-bottom: 8px;
-}
+.mt-2 { margin-top: 8px; }
+.mb-2 { margin-bottom: 8px; }
 
 .instruction-content {
   padding: 0 14px 14px;
@@ -215,18 +216,19 @@
 }
 
 .instruction-content p {
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   color: var(--text-secondary);
   line-height: 1.6;
   margin-bottom: 12px;
 }
 
 .instruction-content code {
-  background: var(--bg-tertiary);
+  background: #07100c;
   padding: 2px 6px;
   border-radius: 4px;
   font-size: 0.78rem;
-  color: var(--accent-cyan);
+  color: #bef264;
+  border: 1px solid rgba(134, 239, 172, 0.15);
 }
 
 .tasks-bullet-list {
@@ -240,7 +242,7 @@
 }
 
 .tasks-bullet-list li::marker {
-  color: var(--accent-cyan);
+  color: #bef264;
 }
 
 .verify-details-list {
@@ -260,17 +262,17 @@
   padding: 8px 12px;
   border-radius: var(--radius-sm);
   font-size: 0.78rem;
-  background: var(--bg-tertiary);
+  background: rgba(14, 30, 22, 0.85);
 }
 
 .verify-detail-item.pass {
-  color: var(--accent-green);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  color: #86efac;
+  border: 1px solid rgba(74, 222, 128, 0.3);
 }
 
 .verify-detail-item.fail {
-  color: var(--accent-red);
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border: 1px solid rgba(248, 113, 113, 0.3);
 }
 
 .instruction-hint-area {
@@ -279,21 +281,21 @@
 
 .hint-toggle {
   font-size: 0.75rem !important;
-  color: var(--accent-purple) !important;
+  color: #bef264 !important;
 }
 
 .hint-box {
   margin-top: 8px;
   padding: 10px 14px;
-  background: var(--bg-tertiary);
-  border-radius: var(--radius-sm);
-  border-left: 3px solid var(--accent-purple);
+  background: rgba(14, 30, 22, 0.9);
+  border-radius: 8px;
+  border-left: 3px solid #bef264;
   animation: fadeIn 0.2s ease-out;
 }
 
 .hint-box code {
   font-size: 0.78rem;
-  color: var(--accent-green);
+  color: #86efac;
   background: none;
   padding: 0;
   white-space: pre-wrap;
@@ -314,9 +316,9 @@
   padding: 16px 20px;
   margin-bottom: 12px;
   border-radius: var(--radius-md);
-  background: rgba(13, 17, 23, 0.85);
-  border: 1px solid rgba(0, 212, 255, 0.25);
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
+  background: rgba(13, 30, 24, 0.88);
+  border: 1px solid rgba(134, 239, 172, 0.2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -327,24 +329,24 @@
   font-family: var(--font-mono);
   font-size: 0.68rem;
   font-weight: 700;
-  color: var(--accent-orange);
-  background: var(--accent-orange-dim);
+  color: #fde047;
+  background: rgba(251, 191, 36, 0.15);
   padding: 3px 10px;
-  border-radius: 12px;
-  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 9999px;
+  border: 1px solid rgba(251, 191, 36, 0.3);
   display: inline-flex;
   align-self: flex-start;
 }
 
 .sandbox-coming-soon-banner h3 {
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--text-bright);
   line-height: 1.2;
 }
 
 .sandbox-coming-soon-banner p {
-  font-size: 0.82rem;
+  font-size: 0.84rem;
   color: var(--text-secondary);
   line-height: 1.5;
 }
@@ -355,7 +357,6 @@
 
 /* ── "Sandbox is about to close" banner ───────────────────── */
 .lab-closing-banner {
-  /* Above the floating inspector, which would otherwise cover its button. */
   position: relative;
   z-index: 950;
   display: flex;
@@ -363,11 +364,11 @@
   gap: 10px;
   margin: 0 24px 12px;
   padding: 8px 16px;
-  border-radius: 8px;
+  border-radius: 9999px;
   font-size: 13px;
-  color: #fcd34d;
-  background: rgba(245, 158, 11, 0.12);
-  border: 1px solid rgba(245, 158, 11, 0.35);
+  color: #fde047;
+  background: rgba(251, 191, 36, 0.12);
+  border: 1px solid rgba(251, 191, 36, 0.35);
 }
 
 .lab-closing-banner span { flex: 1; }
@@ -377,8 +378,8 @@
 .verify-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
+  background: rgba(9, 19, 15, 0.8);
+  backdrop-filter: blur(6px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -387,9 +388,13 @@
 
 .verify-card {
   text-align: center;
-  padding: 48px 40px;
-  max-width: 400px;
+  padding: 44px 36px;
+  max-width: 420px;
   width: 90%;
+  background: rgba(13, 30, 24, 0.95);
+  border: 1.5px solid rgba(134, 239, 172, 0.25);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
 }
 
 .verify-icon {
@@ -399,148 +404,29 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 20px;
+  margin: 0 auto 16px;
 }
 
-.verify-icon.checking {
-  background: var(--accent-cyan-dim);
-  color: var(--accent-cyan);
-}
 .verify-icon.pass {
-  background: var(--accent-green-dim);
-  color: var(--accent-green);
+  background: rgba(16, 185, 129, 0.15);
+  border: 1.5px solid rgba(74, 222, 128, 0.4);
+  color: #4ade80;
 }
+
 .verify-icon.fail {
-  background: var(--accent-red-dim);
-  color: var(--accent-red);
+  background: rgba(248, 113, 113, 0.15);
+  border: 1.5px solid rgba(248, 113, 113, 0.4);
+  color: #f87171;
 }
 
-.verify-card h3 {
-  font-size: 1.2rem;
-  color: var(--text-bright);
-  margin-bottom: 8px;
-}
-
-.verify-card p {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  margin-bottom: 24px;
-}
-
-/* ── Lab Not Found ────────────────────────────────────────── */
-.lab-not-found {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: calc(100vh - 64px);
-  gap: 12px;
-  color: var(--text-secondary);
-}
-
-.lab-not-found h2 {
-  color: var(--text-bright);
-}
-
-/* ── Responsive ───────────────────────────────────────────── */
-/* Panel switch: only shown on narrow screens */
-.lab-panel-tabs { display: none; }
-
-@media (max-width: 900px) {
-  /* One panel at a time, chosen with the tabs, each using the full width. */
-  .lab-panel-tabs {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    flex-shrink: 0;
-    border-bottom: 1px solid var(--border-subtle);
-    background: var(--bg-secondary);
+@media (max-width: 768px) {
+  .lab-workspace {
+    flex-direction: column;
   }
-
-  .lab-panel-tabs button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    padding: 10px;
-    border: 0;
-    border-bottom: 2px solid transparent;
-    background: transparent;
-    color: var(--text-secondary);
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-  }
-
-  .lab-panel-tabs button.active {
-    color: var(--accent-cyan);
-    border-bottom-color: var(--accent-cyan);
-  }
-
-  .lab-workspace[data-panel='terminal'] .lab-instructions,
-  .lab-workspace[data-panel='instructions'] .lab-terminal {
-    display: none;
-  }
-
   .lab-instructions {
     width: 100%;
+    height: 40%;
     border-right: none;
+    border-bottom: 1px solid rgba(134, 239, 172, 0.14);
   }
-
-  .lab-terminal { padding: 6px; }
-
-  .lab-header {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-    padding: 10px 12px;
-  }
-
-  .lab-header-right {
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-
-  .lab-title { font-size: 1rem; }
-
-  .lab-closing-banner,
-  .lab-alert-banner { margin: 8px 12px !important; }
-
-  /* The inspector becomes a sheet along the bottom instead of a floating card. */
-  .floating-inspector {
-    left: 8px !important;
-    right: 8px;
-    top: auto !important;
-    bottom: 8px;
-    width: auto;
-    max-height: 55vh;
-  }
-
-  .inspector-minimized-pill {
-    left: auto !important;
-    right: 12px;
-    top: auto !important;
-    bottom: 12px;
-  }
-
-  .inspector-drag-handle { cursor: default; }
-
-  .mentor-chat-drawer {
-    left: 8px;
-    right: 8px;
-    width: auto;
-    top: auto;
-    height: 72vh;
-  }
-}
-
-/* ── Inline commands in task text ─────────────────────────── */
-.task-code {
-  padding: 1px 6px;
-  border-radius: 4px;
-  background: rgba(0, 212, 255, 0.08);
-  border: 1px solid rgba(0, 212, 255, 0.15);
-  color: var(--accent-cyan);
-  font-family: var(--font-mono);
-  font-size: 0.9em;
-  word-break: break-word;
 }

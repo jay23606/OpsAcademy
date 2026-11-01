@@ -1,17 +1,26 @@
+/* ═══════════════════════════════════════════════════════════════
+   Auth Page Styles — Engineered Tech Theme
+   ═══════════════════════════════════════════════════════════════ */
+
 .auth-page {
   min-height: calc(100vh - 64px);
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 120px 20px 60px;
+  padding: 100px 20px 60px;
+  background: var(--bg-primary);
 }
 
 .auth-card {
   width: 100%;
-  max-width: 420px;
-  padding: 28px;
+  max-width: 440px;
+  padding: 32px;
   display: grid;
-  gap: 16px;
+  gap: 18px;
+  background: rgba(13, 30, 24, 0.9);
+  border: 1.5px solid rgba(134, 239, 172, 0.22);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 24px rgba(190, 242, 100, 0.08);
 }
 
 .auth-tabs {
@@ -19,8 +28,9 @@
   grid-template-columns: 1fr 1fr;
   gap: 6px;
   padding: 4px;
-  border-radius: var(--radius-md);
-  background: var(--bg-input);
+  border-radius: 9999px;
+  background: rgba(10, 22, 17, 0.8);
+  border: 1px solid rgba(134, 239, 172, 0.14);
 }
 
 .auth-tab {
@@ -28,19 +38,26 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 8px;
+  padding: 9px;
   border: 0;
-  border-radius: var(--radius-sm);
+  border-radius: 9999px;
   background: transparent;
   color: var(--text-secondary);
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.auth-tab:hover {
+  color: var(--text-bright);
 }
 
 .auth-tab.active {
-  background: var(--accent-cyan-dim);
-  color: var(--accent-cyan);
+  background: #bef264;
+  color: #0b2417;
+  font-weight: 800;
+  box-shadow: 0 2px 10px rgba(190, 242, 100, 0.35);
 }
 
 .auth-lead {
@@ -53,21 +70,25 @@
   display: grid;
   gap: 6px;
   font-size: 12px;
+  font-weight: 600;
   color: var(--text-secondary);
 }
 
 .auth-field .input {
   width: 100%;
+  border-radius: 10px;
 }
 
 .auth-error {
-  padding: 8px 12px;
-  border-radius: var(--radius-sm);
-  background: var(--accent-red-dim);
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(248, 113, 113, 0.12);
+  border: 1px solid rgba(248, 113, 113, 0.3);
   color: #fca5a5;
   font-size: 13px;
 }
 
 .auth-submit {
   justify-content: center;
+  margin-top: 4px;
 }

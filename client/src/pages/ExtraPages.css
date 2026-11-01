@@ -1,6 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   Smaller pages and panels added after the first design pass:
-   account links, lab of the day, case study, public profile, operator page.
+   Smaller pages and panels — Engineered Tech Theme
    ═══════════════════════════════════════════════════════════════ */
 
 /* ── Account forms ────────────────────────────────────────── */
@@ -8,7 +7,8 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
+  font-weight: 800;
   color: var(--text-bright);
 }
 
@@ -16,8 +16,9 @@
   justify-self: center;
   border: 0;
   background: none;
-  color: var(--accent-cyan);
+  color: #bef264;
   font-size: 13px;
+  font-weight: 600;
   cursor: pointer;
 }
 
@@ -26,15 +27,16 @@
 .auth-notice {
   display: grid;
   gap: 6px;
-  padding: 10px 12px;
-  border-radius: var(--radius-sm);
-  background: var(--accent-cyan-dim);
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(190, 242, 100, 0.12);
+  border: 1px solid rgba(190, 242, 100, 0.25);
   color: var(--text-primary);
   font-size: 13px;
   line-height: 1.5;
 }
 
-.auth-notice a { color: var(--accent-cyan); text-decoration: underline; }
+.auth-notice a { color: #bef264; font-weight: 700; text-decoration: underline; }
 
 /* ── Dashboard: lab of the day, account tools ─────────────── */
 .daily-card {
@@ -43,12 +45,14 @@
   gap: 16px;
   padding: 16px 20px;
   margin-bottom: 20px;
-  border-color: rgba(245, 158, 11, 0.35);
+  background: rgba(13, 30, 24, 0.88);
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  border-radius: 16px;
 }
 
-.daily-card > svg { color: var(--accent-orange); flex-shrink: 0; }
-.daily-card.done > svg { color: var(--accent-green); }
-.daily-card.done { border-color: rgba(16, 185, 129, 0.35); }
+.daily-card > svg { color: #fbbf24; flex-shrink: 0; }
+.daily-card.done > svg { color: #4ade80; }
+.daily-card.done { border-color: rgba(74, 222, 128, 0.35); }
 
 .daily-text {
   display: grid;
@@ -59,10 +63,10 @@
 
 .daily-label {
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.6px;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: #bef264;
 }
 
 .daily-text strong { color: var(--text-bright); font-size: 1rem; }
@@ -108,10 +112,14 @@
 .case-card {
   padding: 24px 28px;
   margin-bottom: 24px;
+  background: rgba(13, 30, 24, 0.88);
+  border: 1px solid rgba(134, 239, 172, 0.18);
+  border-radius: 18px;
 }
 
 .case-card h2 {
   font-size: 1.25rem;
+  font-weight: 800;
   color: var(--text-bright);
   margin-bottom: 10px;
 }
@@ -122,10 +130,10 @@
   gap: 6px;
   margin: 18px 0 8px;
   font-size: 0.8rem;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  color: var(--accent-cyan);
+  color: #bef264;
 }
 
 .case-card p,
@@ -173,7 +181,7 @@
 .case-card-outcomes svg {
   flex-shrink: 0;
   margin-top: 5px;
-  color: var(--accent-green);
+  color: #4ade80;
 }
 
 .case-study-links {
@@ -187,6 +195,7 @@
 .more-case-studies h2 {
   margin-bottom: 16px;
   font-size: 1.3rem;
+  font-weight: 800;
   color: var(--text-bright);
 }
 
@@ -202,10 +211,19 @@
   padding: 20px;
   color: inherit;
   text-decoration: none;
+  background: rgba(13, 30, 24, 0.88);
+  border: 1px solid rgba(134, 239, 172, 0.16);
+  border-radius: 16px;
+  transition: all 0.2s ease;
+}
+
+.more-case-card:hover {
+  border-color: #bef264;
+  transform: translateY(-2px);
 }
 
 .more-case-card .badge { justify-self: start; }
-.more-case-card h3 { font-size: 1.05rem; color: var(--text-bright); }
+.more-case-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--text-bright); }
 .more-case-card p { font-size: 13px; line-height: 1.6; color: var(--text-secondary); }
 
 .more-case-link {
@@ -213,8 +231,8 @@
   align-items: center;
   gap: 6px;
   font-size: 13px;
-  font-weight: 600;
-  color: var(--accent-cyan);
+  font-weight: 700;
+  color: #bef264;
 }
 
 /* ── Public profile ───────────────────────────────────────── */
@@ -222,6 +240,8 @@
 .admin-page {
   min-height: calc(100vh - 64px);
   padding: 104px 0 64px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .profile-container {
@@ -235,9 +255,12 @@
   align-items: center;
   gap: 18px;
   padding: 24px;
+  background: rgba(13, 30, 24, 0.88);
+  border: 1px solid rgba(134, 239, 172, 0.18);
+  border-radius: 20px;
 }
 
-.profile-header h1 { font-size: 1.5rem; color: var(--text-bright); }
+.profile-header h1 { font-size: 1.5rem; font-weight: 800; color: var(--text-bright); }
 .profile-header p { font-size: 13px; color: var(--text-secondary); }
 
 .profile-avatar {
@@ -247,10 +270,10 @@
   height: 60px;
   flex-shrink: 0;
   border-radius: 50%;
-  background: var(--gradient-primary);
-  color: #04060c;
+  background: linear-gradient(135deg, #bef264 0%, #4ade80 100%);
+  color: #0b2417;
   font-size: 1.6rem;
-  font-weight: 800;
+  font-weight: 900;
 }
 
 .profile-stats,
@@ -265,25 +288,34 @@
   display: grid;
   gap: 4px;
   padding: 16px 18px;
+  background: rgba(13, 30, 24, 0.78);
+  border: 1px solid rgba(134, 239, 172, 0.16);
+  border-radius: 16px;
 }
 
-.profile-stat svg { color: var(--accent-cyan); }
+.profile-stat svg { color: #bef264; }
 
 .profile-stat strong,
 .admin-tile strong {
   font-size: 1.5rem;
+  font-weight: 800;
   color: var(--text-bright);
+  font-family: var(--font-mono);
 }
 
 .profile-stat span,
 .admin-tile span {
   font-size: 12px;
+  font-weight: 600;
   color: var(--text-secondary);
 }
 
 .profile-section,
 .admin-section {
   padding: 20px 24px;
+  background: rgba(13, 30, 24, 0.78);
+  border: 1px solid rgba(134, 239, 172, 0.16);
+  border-radius: 18px;
 }
 
 .profile-section h2,
@@ -292,11 +324,12 @@
   align-items: center;
   gap: 8px;
   margin-bottom: 12px;
-  font-size: 1rem;
+  font-size: 1.05rem;
+  font-weight: 800;
   color: var(--text-bright);
 }
 
-.profile-section h2 svg { color: var(--accent-cyan); }
+.profile-section h2 svg { color: #bef264; }
 
 .profile-list {
   list-style: none;
@@ -342,6 +375,7 @@
   align-items: center;
   gap: 10px;
   font-size: 1.4rem;
+  font-weight: 800;
   color: var(--text-bright);
 }
 
@@ -356,10 +390,10 @@
   font-size: 13px;
 }
 
-.admin-facts dt { color: var(--text-muted); }
+.admin-facts dt { color: #7a998b; }
 .admin-facts dd { color: var(--text-primary); }
-.admin-facts dd.ok { color: var(--accent-green); }
-.admin-facts dd.bad { color: var(--accent-red); }
+.admin-facts dd.ok { color: #4ade80; }
+.admin-facts dd.bad { color: #f87171; }
 
 .admin-table-wrap { overflow-x: auto; }
 
@@ -371,9 +405,9 @@
 
 .admin-table th,
 .admin-table td {
-  padding: 8px 10px;
+  padding: 10px 12px;
   text-align: left;
-  border-bottom: 1px solid var(--border-subtle);
+  border-bottom: 1px solid rgba(134, 239, 172, 0.1);
   white-space: nowrap;
 }
 
@@ -381,7 +415,8 @@
   font-size: 11px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  color: var(--text-muted);
+  color: #86efac;
+  font-weight: 700;
 }
 
 @media (max-width: 600px) {
@@ -390,8 +425,6 @@
 }
 
 /* ── Navbar on phones ─────────────────────────────────────── */
-/* The bar must never be wider than the screen: a too-wide bar makes the
-   phone zoom the whole page out. Secondary items go first. */
 @media (max-width: 768px) {
   .nav-telemetry-badge { display: none; }
   .navbar { padding-left: 12px; padding-right: 12px; }
@@ -406,10 +439,6 @@
   .nav-progress span:last-child { display: none; }
 }
 
-/* ── Phone widths: nothing may be wider than the screen ───── */
-/* A grid column sized `1fr` grows to fit its widest child (a code block, a
-   table), which pushes the whole page past the screen. `minmax(0, 1fr)` lets
-   the column shrink and the wide child scroll inside itself instead. */
 .learn-container { grid-template-columns: 260px minmax(0, 1fr); }
 .learn-body { min-width: 0; }
 
@@ -421,18 +450,4 @@
     flex-wrap: wrap;
     gap: 10px;
   }
-
-  .hero-content {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 32px;
-  }
-
-  .hero-text,
-  .hero-terminal { min-width: 0; }
-
-  .hero-title { font-size: 2.3rem; letter-spacing: -0.5px; }
-  .mock-terminal { transform: none; }
-  .floating-badge { display: none; }
-  .stats-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-  .modes-grid { grid-template-columns: minmax(0, 1fr); }
 }

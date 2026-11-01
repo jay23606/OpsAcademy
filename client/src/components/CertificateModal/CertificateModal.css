@@ -1,7 +1,11 @@
+/* ═══════════════════════════════════════════════════════════════
+   Certificate Modal Styles — Engineered Tech Theme
+   ═══════════════════════════════════════════════════════════════ */
+
 .cert-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
+  background: rgba(9, 19, 15, 0.85);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
@@ -14,11 +18,11 @@
   position: relative;
   width: 100%;
   max-width: 820px;
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-accent);
-  border-radius: var(--radius-lg);
+  background: rgba(13, 30, 24, 0.98);
+  border: 1.5px solid rgba(134, 239, 172, 0.25);
+  border-radius: 20px;
   padding: 32px;
-  box-shadow: var(--shadow-glow-cyan);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 24px rgba(190, 242, 100, 0.15);
 }
 
 .cert-close-btn {
@@ -51,20 +55,20 @@
 
 /* Certificate Frame */
 .certificate-frame {
-  background: #0a0e1a;
-  color: #e2e8f0;
+  background: #07100c;
+  color: #f1f7f4;
   border-radius: var(--radius-md);
   padding: 16px;
 }
 
 .cert-border-outer {
-  border: 2px solid rgba(0, 212, 255, 0.4);
+  border: 2px solid rgba(190, 242, 100, 0.4);
   padding: 8px;
   border-radius: var(--radius-sm);
 }
 
 .cert-border-inner {
-  border: 1px dashed rgba(124, 58, 237, 0.4);
+  border: 1px dashed rgba(74, 222, 128, 0.4);
   padding: 32px;
   border-radius: var(--radius-sm);
   text-align: center;
@@ -83,7 +87,7 @@
   gap: 10px;
   font-size: 1.2rem;
   font-weight: 800;
-  color: var(--accent-cyan);
+  color: #bef264;
 }
 
 .cert-id {
@@ -96,7 +100,7 @@
   font-size: 0.75rem;
   font-weight: 800;
   letter-spacing: 3px;
-  color: var(--accent-orange);
+  color: #bef264;
   text-transform: uppercase;
 }
 
@@ -115,7 +119,7 @@
 .cert-recipient {
   font-size: 2.2rem;
   font-weight: 800;
-  background: var(--gradient-text);
+  background: linear-gradient(135deg, #f2fde2 0%, #bef264 50%, #4ade80 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin: 8px 0 16px;
@@ -140,16 +144,16 @@
   font-size: 0.75rem;
   font-weight: 700;
   padding: 4px 12px;
-  border-radius: 20px;
-  background: var(--accent-cyan-dim);
-  color: var(--accent-cyan);
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 9999px;
+  background: rgba(190, 242, 100, 0.14);
+  color: #bef264;
+  border: 1px solid rgba(190, 242, 100, 0.35);
 }
 
 .cert-footer {
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid var(--border-subtle);
+  border-top: 1px solid rgba(134, 239, 172, 0.14);
   padding-top: 20px;
 }
 
@@ -206,7 +210,7 @@
 }
 
 .cert-message h3 { color: var(--text-bright); }
-.cert-message svg { color: var(--accent-cyan); }
+.cert-message svg { color: #bef264; }
 .cert-message p { max-width: 440px; line-height: 1.6; }
 
 .cert-verify {
@@ -214,5 +218,6 @@
   font-family: var(--font-mono);
   font-size: 11px;
   word-break: break-all;
-  opacity: 0.75;
+  color: #bef264;
+  opacity: 0.85;
 }

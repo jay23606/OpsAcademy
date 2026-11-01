@@ -1,14 +1,16 @@
 /* ═══════════════════════════════════════════════════════════════
-   OpsAcademy Dedicated Case Studies Hub Styles
+   OpsAcademy Dedicated Case Studies Hub Styles — Engineered Tech Theme
    ═══════════════════════════════════════════════════════════════ */
 
 .case-studies-page {
   padding: 32px 0 80px;
   min-height: calc(100vh - 64px);
+  background: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .case-studies-page .container {
-  max-width: 1300px;
+  max-width: 1360px;
   padding: 0 32px;
 }
 
@@ -16,10 +18,13 @@
 
 .case-studies-hero {
   padding: 2.8rem;
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.92) 100%);
-  border: 1px solid rgba(0, 212, 255, 0.4);
+  background: 
+    radial-gradient(ellipse at 80% 0%, rgba(16, 185, 129, 0.22), transparent 70%),
+    radial-gradient(circle at 10% 90%, rgba(190, 242, 100, 0.08), transparent 60%),
+    linear-gradient(180deg, #0d1e18 0%, #091410 100%);
+  border: 1px solid rgba(134, 239, 172, 0.2);
   border-radius: 24px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,11 +37,10 @@
 .case-studies-hero::before {
   content: '';
   position: absolute;
-  top: -50%;
-  right: -20%;
-  width: 450px;
-  height: 450px;
-  background: radial-gradient(circle, rgba(0, 212, 255, 0.18) 0%, rgba(124, 58, 237, 0.1) 50%, transparent 70%);
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 70% 60% at 50% 0%, rgba(16, 185, 129, 0.16), transparent 70%),
+    radial-gradient(ellipse 50% 50% at 85% 50%, rgba(56, 189, 248, 0.10), transparent 65%);
   pointer-events: none;
 }
 
@@ -45,10 +49,10 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.35rem 0.85rem;
-  background: rgba(0, 212, 255, 0.15);
-  border: 1px solid rgba(0, 212, 255, 0.4);
-  border-radius: 100px;
-  color: #00d4ff;
+  background: rgba(190, 242, 100, 0.14);
+  border: 1px solid rgba(190, 242, 100, 0.4);
+  border-radius: 9999px;
+  color: #bef264;
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.5px;
@@ -58,14 +62,14 @@
 .case-hero-title {
   font-size: 2.4rem;
   font-weight: 900;
-  color: #fff;
+  color: #f2fde2;
   line-height: 1.25;
   margin: 0 0 0.8rem 0;
   letter-spacing: -0.5px;
 }
 
 .case-hero-subtitle {
-  color: #94a3b8;
+  color: #c0ded0;
   font-size: 1.05rem;
   line-height: 1.6;
   margin: 0;
@@ -81,8 +85,8 @@
 
 .hero-stat-box {
   padding: 1rem 1.5rem;
-  background: rgba(15, 23, 42, 0.8);
-  border: 1px solid rgba(0, 212, 255, 0.3);
+  background: rgba(14, 30, 22, 0.85);
+  border: 1px solid rgba(134, 239, 172, 0.22);
   border-radius: 16px;
   display: flex;
   flex-direction: column;
@@ -92,14 +96,16 @@
 .stat-num {
   font-size: 1.6rem;
   font-weight: 900;
-  color: #00d4ff;
+  color: #bef264;
+  font-family: var(--font-mono);
 }
 
 .stat-desc {
-  font-size: 0.78rem;
-  color: #94a3b8;
+  font-size: 0.75rem;
+  color: #7a998b;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  font-weight: 600;
 }
 
 /* ── Main Case Study Card ───────────────────────────────────── */
@@ -112,10 +118,10 @@
 
 .case-study-main-card {
   padding: 2.5rem;
-  background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.9));
-  border: 1px solid rgba(0, 212, 255, 0.35);
+  background: rgba(13, 30, 24, 0.88);
+  border: 1.5px solid rgba(134, 239, 172, 0.2);
   border-radius: 24px;
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
 }
 
 .card-top-meta {
@@ -131,9 +137,9 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.3rem 0.75rem;
-  background: rgba(124, 58, 237, 0.15);
-  border: 1px solid rgba(124, 58, 237, 0.3);
-  border-radius: 100px;
+  background: rgba(192, 132, 252, 0.15);
+  border: 1px solid rgba(192, 132, 252, 0.35);
+  border-radius: 9999px;
   color: #c084fc;
   font-size: 0.8rem;
   font-weight: 700;
@@ -144,24 +150,24 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.3rem 0.75rem;
-  background: rgba(52, 211, 153, 0.15);
-  border: 1px solid rgba(52, 211, 153, 0.3);
-  border-radius: 100px;
-  color: #34d399;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(74, 222, 128, 0.35);
+  border-radius: 9999px;
+  color: #86efac;
   font-size: 0.8rem;
   font-weight: 700;
 }
 
 .case-card-title {
   font-size: 1.9rem;
-  font-weight: 800;
-  color: #fff;
+  font-weight: 900;
+  color: #f2fde2;
   margin: 0 0 1rem 0;
   line-height: 1.3;
 }
 
 .case-card-summary {
-  color: #cbd5e1;
+  color: #c0ded0;
   font-size: 1.05rem;
   line-height: 1.6;
   margin: 0 0 1.5rem 0;
@@ -175,19 +181,19 @@
 }
 
 .case-tag-pill {
-  padding: 0.25rem 0.75rem;
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  color: #00d4ff;
+  padding: 0.3rem 0.85rem;
+  background: rgba(14, 30, 22, 0.8);
+  border: 1px solid rgba(134, 239, 172, 0.2);
+  border-radius: 9999px;
+  color: #86efac;
   font-size: 0.82rem;
   font-weight: 600;
 }
 
 .architecture-highlights-box {
   padding: 1.5rem;
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(10, 22, 17, 0.7);
+  border: 1px solid rgba(134, 239, 172, 0.14);
   border-radius: 16px;
   margin-bottom: 2rem;
 }
@@ -196,9 +202,9 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #f8fafc;
+  color: #f2fde2;
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 800;
   margin: 0 0 1rem 0;
 }
 
@@ -212,13 +218,13 @@
   display: flex;
   align-items: flex-start;
   gap: 0.6rem;
-  color: #94a3b8;
+  color: #c0ded0;
   font-size: 0.9rem;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .icon-cyan {
-  color: #00d4ff;
+  color: #bef264;
   flex-shrink: 0;
   margin-top: 2px;
 }

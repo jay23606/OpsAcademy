@@ -1,5 +1,8 @@
+/* ═══════════════════════════════════════════════════════════════
+   Mentor Chat Styles — Engineered Tech Theme
+   ═══════════════════════════════════════════════════════════════ */
+
 .mentor-chat-drawer {
-  /* Sits below the navbar and the lab header so neither covers its title bar. */
   position: fixed;
   top: 142px;
   right: 12px;
@@ -8,11 +11,12 @@
   z-index: 50;
   display: flex;
   flex-direction: column;
-  background: var(--bg-card);
-  border: 1px solid var(--border-accent);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-glow-purple);
+  background: rgba(11, 24, 19, 0.96);
+  border: 1.5px solid rgba(134, 239, 172, 0.22);
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 24px rgba(190, 242, 100, 0.12);
   overflow: hidden;
+  backdrop-filter: blur(16px);
 }
 
 .mentor-chat-header {
@@ -20,8 +24,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 14px 16px;
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(14, 30, 22, 0.95);
+  border-bottom: 1px solid rgba(134, 239, 172, 0.14);
 }
 
 .mentor-title-area {
@@ -33,24 +37,26 @@
 .mentor-avatar {
   width: 34px;
   height: 34px;
-  border-radius: 50%;
-  background: var(--accent-purple-dim);
-  color: var(--accent-purple);
+  border-radius: 8px;
+  background: #11281e;
+  color: #bef264;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(124, 58, 237, 0.3);
+  border: 1.5px solid #bef264;
+  box-shadow: 0 0 10px rgba(190, 242, 100, 0.3);
 }
 
 .mentor-title-area h3 {
   font-size: 0.95rem;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--text-bright);
 }
 
 .mentor-status-text {
   font-size: 0.72rem;
-  color: var(--accent-cyan);
+  color: #bef264;
+  font-weight: 700;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -83,14 +89,15 @@
 .msg-avatar {
   width: 26px;
   height: 26px;
-  border-radius: 50%;
-  background: var(--accent-purple-dim);
-  color: var(--accent-purple);
+  border-radius: 6px;
+  background: #11281e;
+  color: #bef264;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   margin-top: 2px;
+  border: 1px solid rgba(190, 242, 100, 0.4);
 }
 
 .msg-bubble {
@@ -101,24 +108,25 @@
 }
 
 .msg-user .msg-bubble {
-  background: var(--accent-cyan-dim);
-  color: var(--accent-cyan);
+  background: #bef264;
+  color: #0b2417;
+  font-weight: 600;
   border-bottom-right-radius: 2px;
-  border: 1px solid rgba(0, 212, 255, 0.2);
+  box-shadow: 0 2px 10px rgba(190, 242, 100, 0.25);
 }
 
 .msg-mentor .msg-bubble {
-  background: var(--bg-tertiary);
+  background: rgba(14, 30, 22, 0.85);
   color: var(--text-primary);
   border-bottom-left-radius: 2px;
-  border: 1px solid var(--border-subtle);
+  border: 1px solid rgba(134, 239, 172, 0.16);
   white-space: pre-wrap;
 }
 
 .msg-blocked .msg-bubble {
-  background: var(--accent-red-dim);
-  color: var(--accent-red);
-  border-color: rgba(239, 68, 68, 0.3);
+  background: rgba(248, 113, 113, 0.15);
+  color: #fca5a5;
+  border-color: rgba(248, 113, 113, 0.35);
 }
 
 .loading-bubble {
@@ -132,14 +140,15 @@
   display: flex;
   gap: 8px;
   padding: 12px;
-  background: var(--bg-secondary);
-  border-top: 1px solid var(--border-subtle);
+  background: rgba(14, 30, 22, 0.95);
+  border-top: 1px solid rgba(134, 239, 172, 0.14);
 }
 
 .mentor-input {
   flex: 1;
   font-size: 0.82rem !important;
   padding: 8px 12px !important;
+  border-radius: 9999px;
 }
 
 /* ── Hint tiers ───────────────────────────────────────────── */
@@ -153,21 +162,18 @@
   padding: 2px 8px;
   border-radius: 999px;
   font-size: 10px;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
-.msg-tier.tier-1 { background: var(--accent-cyan-dim); color: var(--accent-cyan); }
-.msg-tier.tier-2 { background: var(--accent-orange-dim); color: var(--accent-orange); }
-.msg-tier.tier-3 { background: var(--accent-purple-dim); color: #a78bfa; }
+.msg-tier.tier-1 { background: rgba(190, 242, 100, 0.15); color: #bef264; }
+.msg-tier.tier-2 { background: rgba(251, 191, 36, 0.15); color: #fbbf24; }
+.msg-tier.tier-3 { background: rgba(192, 132, 252, 0.15); color: #c084fc; }
 
 .mentor-escalate {
   align-self: flex-start;
   margin-left: 36px;
-}
-
-.mentor-escalate {
   max-width: calc(100% - 36px);
   height: auto;
   white-space: normal;
@@ -177,8 +183,9 @@
 .msg-bubble code {
   padding: 1px 5px;
   border-radius: 4px;
-  background: rgba(0, 212, 255, 0.08);
-  color: var(--accent-cyan);
+  background: #07100c;
+  color: #bef264;
+  border: 1px solid rgba(134, 239, 172, 0.15);
   font-family: var(--font-mono);
   font-size: 0.9em;
   word-break: break-word;

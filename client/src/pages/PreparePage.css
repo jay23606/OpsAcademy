@@ -1,6 +1,12 @@
+/* ═══════════════════════════════════════════════════════════════
+   Prepare Page Styles — Engineered Tech Theme
+   ═══════════════════════════════════════════════════════════════ */
+
 .prepare-page {
   min-height: calc(100vh - 64px);
   padding-bottom: 80px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .prepare-loading, .prepare-error {
@@ -14,9 +20,10 @@
 }
 
 .prepare-header {
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-subtle);
+  background: rgba(11, 24, 19, 0.95);
+  border-bottom: 1px solid rgba(134, 239, 172, 0.14);
   padding: 16px 0;
+  backdrop-filter: blur(12px);
 }
 
 .prepare-header-inner {
@@ -33,14 +40,14 @@
 
 .prepare-badge {
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
-  color: var(--accent-orange);
+  color: #bef264;
   letter-spacing: 0.5px;
 }
 
 .prepare-header-title h1 {
-  font-size: 1.3rem;
+  font-size: 1.35rem;
   font-weight: 800;
   color: var(--text-bright);
 }
@@ -58,37 +65,41 @@
 /* Tabs */
 .prepare-tabs {
   display: flex;
-  gap: 12px;
-  border-bottom: 1px solid var(--border-subtle);
-  padding-bottom: 12px;
+  gap: 10px;
+  border-bottom: 1px solid rgba(134, 239, 172, 0.14);
+  padding-bottom: 14px;
   margin-bottom: 32px;
+  flex-wrap: wrap;
 }
 
 .prepare-tab {
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 20px;
+  padding: 8px 20px;
   font-family: var(--font-sans);
-  font-size: 0.9rem;
-  font-weight: 600;
-  background: transparent;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
-  color: var(--text-secondary);
+  font-size: 0.88rem;
+  font-weight: 700;
+  background: rgba(14, 30, 22, 0.6);
+  border: 1.5px solid rgba(134, 239, 172, 0.2);
+  border-radius: 9999px;
+  color: #c0ded0;
   cursor: pointer;
   transition: all var(--transition-fast);
 }
 
 .prepare-tab:hover {
-  color: var(--text-primary);
-  border-color: var(--accent-cyan);
+  color: #ffffff;
+  border-color: #bef264;
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .prepare-tab.active {
-  background: var(--accent-cyan-dim);
-  border-color: var(--accent-cyan);
-  color: var(--accent-cyan);
+  background: #bef264;
+  border-color: #bef264;
+  color: #0b2417;
+  font-weight: 800;
+  box-shadow: 0 2px 10px rgba(190, 242, 100, 0.3);
 }
 
 /* Flashcards Section */
@@ -101,10 +112,11 @@
 }
 
 .deck-progress {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-muted);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #bef264;
   margin-bottom: 16px;
+  font-family: var(--font-mono);
 }
 
 .deck-controls {
@@ -123,6 +135,9 @@
 .question-card {
   padding: 0;
   overflow: hidden;
+  background: rgba(13, 30, 24, 0.78);
+  border: 1px solid rgba(134, 239, 172, 0.16);
+  border-radius: 16px;
 }
 
 .question-card-header {
@@ -137,17 +152,18 @@
 .q-number {
   font-family: var(--font-mono);
   font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--accent-orange);
-  background: var(--accent-orange-dim);
-  padding: 4px 10px;
-  border-radius: 8px;
+  font-weight: 800;
+  color: #bef264;
+  background: rgba(190, 242, 100, 0.14);
+  border: 1px solid rgba(190, 242, 100, 0.3);
+  padding: 4px 12px;
+  border-radius: 9999px;
 }
 
 .q-title {
   flex: 1;
-  font-size: 1rem;
-  font-weight: 600;
+  font-size: 1.05rem;
+  font-weight: 700;
   color: var(--text-bright);
 }
 
@@ -160,22 +176,22 @@
 
 .model-answer-box, .key-points-box {
   padding: 16px;
-  border-radius: var(--radius-md);
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: rgba(10, 22, 17, 0.7);
+  border: 1px solid rgba(134, 239, 172, 0.14);
 }
 
 .box-label {
   font-size: 0.72rem;
-  font-weight: 700;
+  font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: var(--accent-cyan);
+  color: #bef264;
   margin-bottom: 8px;
 }
 
 .model-answer-box p {
-  font-size: 0.9rem;
+  font-size: 0.92rem;
   line-height: 1.6;
   color: var(--text-primary);
 }
@@ -190,12 +206,12 @@
 
 .key-points-list li {
   font-size: 0.78rem;
-  font-weight: 500;
+  font-weight: 600;
   padding: 4px 12px;
-  border-radius: 20px;
-  background: var(--accent-green-dim);
-  color: var(--accent-green);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.12);
+  color: #86efac;
+  border: 1px solid rgba(74, 222, 128, 0.3);
 }
 
 .empty-text {
@@ -214,181 +230,4 @@
   .prepare-tabs {
     flex-direction: column;
   }
-}
-
-/* ── Spaced repetition ────────────────────────────────────── */
-.deck-progress {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-}
-
-.due-chip {
-  padding: 2px 10px;
-  border-radius: 999px;
-  font-size: 11px;
-  font-weight: 600;
-  background: rgba(148, 163, 184, 0.12);
-  color: var(--text-secondary);
-}
-
-.due-chip.due {
-  background: var(--accent-orange-dim);
-  color: var(--accent-orange);
-}
-
-.grade-row {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.grade-prompt {
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-
-.grade-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-}
-
-.grade-btn {
-  min-width: 84px;
-  border: 1px solid var(--border-subtle);
-  background: var(--bg-card);
-  color: var(--text-primary);
-}
-
-.grade-btn:hover { transform: translateY(-1px); }
-.grade-again { border-color: rgba(239, 68, 68, 0.5); color: #fca5a5; }
-.grade-hard { border-color: rgba(245, 158, 11, 0.5); color: #fcd34d; }
-.grade-good { border-color: rgba(16, 185, 129, 0.5); color: #6ee7b7; }
-.grade-easy { border-color: rgba(0, 212, 255, 0.5); color: var(--accent-cyan); }
-
-.deck-done {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  margin-top: 16px;
-  font-size: 13px;
-  color: var(--accent-green);
-}
-
-/* ── Mock interview ───────────────────────────────────────── */
-.mock-interview {
-  max-width: 820px;
-  margin: 0 auto;
-}
-
-.mock-question {
-  padding: 24px;
-  margin-top: 12px;
-}
-
-.mock-question .q-title {
-  margin-bottom: 16px;
-  line-height: 1.5;
-}
-
-.mock-answer-input {
-  width: 100%;
-  resize: vertical;
-  min-height: 160px;
-  font-family: var(--font-sans);
-  line-height: 1.6;
-}
-
-.mock-actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 12px;
-  margin-top: 12px;
-}
-
-.mock-count {
-  margin-right: auto;
-  font-size: 12px;
-  color: var(--text-muted);
-}
-
-.mock-error {
-  margin-top: 8px;
-  font-size: 13px;
-  color: #fca5a5;
-}
-
-.mock-score {
-  display: flex;
-  align-items: baseline;
-  gap: 6px;
-  margin-bottom: 8px;
-}
-
-.mock-score-value {
-  font-size: 44px;
-  font-weight: 800;
-  line-height: 1;
-}
-
-.mock-score.pass .mock-score-value { color: var(--accent-green); }
-.mock-score.fail .mock-score-value { color: var(--accent-orange); }
-.mock-score-label { color: var(--text-muted); }
-
-.mock-xp {
-  margin-left: 12px;
-  padding: 2px 10px;
-  border-radius: 999px;
-  background: var(--accent-green-dim);
-  color: var(--accent-green);
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.mock-feedback {
-  margin-bottom: 16px;
-  color: var(--text-primary);
-}
-
-.mock-points {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 6px;
-}
-
-.mock-points li {
-  display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  font-size: 14px;
-}
-
-.mock-points li svg { flex-shrink: 0; margin-top: 3px; }
-.mock-points .covered { color: #6ee7b7; }
-.mock-points .missed { color: var(--text-secondary); }
-.mock-points .missed svg { color: #fca5a5; }
-
-.mock-result .model-answer-box {
-  margin-top: 16px;
-}
-
-.mock-result .model-answer-box p {
-  white-space: pre-wrap;
-}
-
-.mock-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 16px;
 }
