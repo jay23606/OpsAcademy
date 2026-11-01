@@ -46,6 +46,9 @@ const config = {
   isTest: env === 'test',
   port: int('PORT', 4000),
 
+  // 'all' = HTTP API + WebSocket terminal | 'api' = HTTP API only | 'terminal' = WebSocket terminal only
+  serviceRole: (process.env.SERVICE_ROLE || 'all').toLowerCase(),
+
   // 'pty' = local shell via node-pty | 'docker' = Docker containers via dockerode
   sandboxMode: process.env.SANDBOX_MODE || 'pty',
 
@@ -88,9 +91,9 @@ const config = {
   dailyChallenge: process.env.DAILY_CHALLENGE !== 'off',
 
   // Persistence. Set DATA_DIR to a mounted volume in production.
-  // STORE_DRIVER: 'json' (one file, the default) or 'sqlite' (one row per document).
+  // STORE_DRIVER: 'sqlite' (default in production) or 'json' (default in development).
   dataDir: process.env.DATA_DIR || path.join(__dirname, '..', '.data'),
-  storeDriver: (process.env.STORE_DRIVER || 'json').toLowerCase(),
+  storeDriver: (process.env.STORE_DRIVER || (isProd ? 'sqlite' : 'json')).toLowerCase(),
 
   rateLimit: {
     windowMs: 60 * 1000,

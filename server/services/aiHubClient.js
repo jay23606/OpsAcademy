@@ -20,11 +20,22 @@ const STREAM_IDLE_FACTOR = 4;
 class HubUnavailableError extends Error {}
 
 function createClient({ baseUrl = config.aiHubUrl, token = config.aiHubToken, timeoutMs = config.aiHubTimeoutMs, http = axios } = {}) {
-  let failures = 0;
-  let openUntil = 0;
+  const breakers = new Map();
+  function getBreaker(endpoint) {
+    let key = 'default';
+    if (endpoint.includes('hint')) key = 'hint';
+    else if (endpoint.includes('scan')) key = 'scan';
+    else if (endpoint.includes('interview')) key = 'interview';
+
+    if (!breakers.has(key)) {
+      breakers.set(key, { failures: 0, openUntil: 0 });
+    }
+    return breakers.get(key);
+  }
 
   async function post(endpoint, body) {
-    if (Date.now() < openUntil) {
+    const breaker = getBreaker(endpoint);
+    if (Date.now() < breaker.openUntil) {
       metrics.aiHubDuration.observe({ endpoint, outcome: 'circuit_open' }, 0);
       throw new HubUnavailableError('AI hub circuit open');
     }
@@ -44,15 +55,15 @@ function createClient({ baseUrl = config.aiHubUrl, token = config.aiHubToken, ti
         if (!RETRYABLE_CODES.has(err.code)) throw err;
         response = await send();
       }
-      failures = 0;
+      breaker.failures = 0;
       end({ outcome: 'ok' });
       return response.data.data;
     } catch (err) {
       end({ outcome: 'error' });
-      failures += 1;
-      if (failures >= FAILURE_THRESHOLD) {
-        openUntil = Date.now() + OPEN_MS;
-        failures = 0;
+      breaker.failures += 1;
+      if (breaker.failures >= FAILURE_THRESHOLD) {
+        breaker.openUntil = Date.now() + OPEN_MS;
+        breaker.failures = 0;
         logger.warn({ endpoint }, '[AI Hub] circuit opened after repeated failures');
       }
       throw new HubUnavailableError(err.message);
@@ -66,7 +77,8 @@ function createClient({ baseUrl = config.aiHubUrl, token = config.aiHubToken, ti
    */
   async function* hintStream(payload, { signal } = {}) {
     const endpoint = '/api/agent/hint/stream';
-    if (Date.now() < openUntil) {
+    const breaker = getBreaker(endpoint);
+    if (Date.now() < breaker.openUntil) {
       metrics.aiHubDuration.observe({ endpoint, outcome: 'circuit_open' }, 0);
       throw new HubUnavailableError('AI hub circuit open');
     }
@@ -74,10 +86,10 @@ function createClient({ baseUrl = config.aiHubUrl, token = config.aiHubToken, ti
     const end = metrics.aiHubDuration.startTimer({ endpoint });
     const fail = (message) => {
       end({ outcome: 'error' });
-      failures += 1;
-      if (failures >= FAILURE_THRESHOLD) {
-        openUntil = Date.now() + OPEN_MS;
-        failures = 0;
+      breaker.failures += 1;
+      if (breaker.failures >= FAILURE_THRESHOLD) {
+        breaker.openUntil = Date.now() + OPEN_MS;
+        breaker.failures = 0;
         logger.warn({ endpoint }, '[AI Hub] circuit opened after repeated failures');
       }
       return new HubUnavailableError(message);
@@ -133,7 +145,7 @@ function createClient({ baseUrl = config.aiHubUrl, token = config.aiHubToken, ti
     }
 
     if (!finished) throw fail('AI hub stream ended early');
-    failures = 0;
+    breaker.failures = 0;
     end({ outcome: 'ok' });
   }
 

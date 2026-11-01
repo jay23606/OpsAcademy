@@ -255,20 +255,77 @@ function info(engineId) {
 }
 
 /**
- * Remove containers and networks left behind by a previous gateway process
- * (crash or redeploy), found by label.
+ * Reconnect to live containers left behind by a previous process
+ * (e.g. after a zero-downtime deploy or process restart).
  */
-async function cleanupOrphans() {
+async function reconcile() {
   const filters = { label: ['opsacademy.sandbox'] };
-  const containers = await getDocker().listContainers({ all: true, filters });
+  let containers = [];
+  try {
+    containers = await getDocker().listContainers({ all: false, filters });
+  } catch (err) {
+    logger.warn({ err: err.message }, '[Docker] could not list running containers to reconcile');
+    return;
+  }
+
   for (const item of containers) {
-    await getDocker().getContainer(item.Id).remove({ force: true }).catch(() => {});
+    const engineId = item.Labels && item.Labels['opsacademy.sandbox'];
+    if (engineId && !sandboxes.has(engineId)) {
+      const networkName = `opsacademy-net-${engineId}`;
+      const sandbox = { containerId: item.Id, networkName, alive: true, exitListeners: [] };
+      sandboxes.set(engineId, sandbox);
+
+      const container = getDocker().getContainer(item.Id);
+      container.wait().then(() => {
+        sandbox.alive = false;
+        for (const listener of sandbox.exitListeners) listener();
+      }).catch(() => {});
+    }
   }
-  const networks = await getDocker().listNetworks({ filters });
-  for (const item of networks) {
-    await getDocker().getNetwork(item.Id).remove().catch(() => {});
+}
+
+/**
+ * Remove containers and networks left behind by a previous gateway process
+ * (crash or redeploy), found by label. Preserves containers matching keepEngineIds.
+ */
+async function cleanupOrphans({ keepEngineIds = new Set() } = {}) {
+  const filters = { label: ['opsacademy.sandbox'] };
+  let containers = [];
+  try {
+    containers = await getDocker().listContainers({ all: true, filters });
+  } catch (err) {
+    logger.warn({ err: err.message }, '[Docker] could not list containers for orphan cleanup');
+    return { containers: 0, networks: 0 };
   }
-  return { containers: containers.length, networks: networks.length };
+
+  let removedContainers = 0;
+  for (const item of containers) {
+    const engineId = item.Labels && item.Labels['opsacademy.sandbox'];
+    if (engineId && keepEngineIds.has(engineId)) {
+      continue;
+    }
+    try {
+      await getDocker().getContainer(item.Id).remove({ force: true });
+      removedContainers++;
+    } catch {}
+  }
+
+  let removedNetworks = 0;
+  try {
+    const networks = await getDocker().listNetworks({ filters });
+    for (const item of networks) {
+      const engineId = item.Labels && item.Labels['opsacademy.sandbox'];
+      if (engineId && keepEngineIds.has(engineId)) {
+        continue;
+      }
+      try {
+        await getDocker().getNetwork(item.Id).remove();
+        removedNetworks++;
+      } catch {}
+    }
+  } catch {}
+
+  return { containers: removedContainers, networks: removedNetworks };
 }
 
 module.exports = {
@@ -281,6 +338,7 @@ module.exports = {
   attach,
   reset,
   info,
+  reconcile,
   cleanupOrphans,
   buildContainerOptions,
 };

@@ -1,0 +1,46 @@
+{
+    email {$ACME_EMAIL:admin@example.com}
+    admin off
+}
+
+{$DOMAIN:localhost} {
+    # Modern compression for text, JSON and scripts
+    encode zstd gzip
+
+    # Terminal WebSocket connections (long-lived streams)
+    @websockets {
+        header Connection *Upgrade*
+        header Upgrade websocket
+    }
+    handle /api/terminal* {
+        reverse_proxy server:4000 {
+            transport http {
+                response_header_timeout 600s
+                dial_timeout 10s
+            }
+        }
+    }
+
+    # API Gateway REST endpoints
+    handle /api/* {
+        reverse_proxy server:4000
+    }
+
+    # Prometheus metrics endpoint
+    handle /metrics {
+        reverse_proxy server:4000
+    }
+
+    # React Frontend Client SPA
+    handle {
+        reverse_proxy client:80
+    }
+
+    # Security Headers
+    header {
+        X-Content-Type-Options nosniff
+        X-Frame-Options DENY
+        Referrer-Policy strict-origin-when-cross-origin
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    }
+}

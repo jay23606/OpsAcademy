@@ -47,6 +47,34 @@ function createManager({ engine = loadEngine(config.sandboxMode), limits = {}, p
   // Slots reserved by createSession calls that are still starting a sandbox.
   const pending = new Map();
   const claimLatencies = { pool: [], cold: [] };
+  const SESSIONS = 'sessions';
+
+  function persist(session) {
+    try {
+      const store = require('../lib/store').getStore();
+      if (store) {
+        store.set(SESSIONS, session.sessionId, {
+          sessionId: session.sessionId,
+          engineId: session.engineId,
+          userId: session.userId,
+          labId: session.labId,
+          createdAt: session.createdAt,
+          lastActiveAt: session.lastActiveAt,
+          fromPool: session.fromPool,
+          claimMs: session.claimMs,
+          history: session.history,
+          strikes: session.strikes,
+        });
+      }
+    } catch {}
+  }
+
+  function unpersist(sessionId) {
+    try {
+      const store = require('../lib/store').getStore();
+      if (store) store.delete(SESSIONS, sessionId);
+    } catch {}
+  }
 
   function countFor(userId) {
     let count = pending.get(userId) || 0;
@@ -108,6 +136,7 @@ function createManager({ engine = loadEngine(config.sandboxMode), limits = {}, p
       closeListeners: new Set(),
     };
     sessions.set(session.sessionId, session);
+    persist(session);
     metrics.sandboxesActive.set(sessions.size);
 
     // If the shell or container exits on its own, drop the session too.
@@ -162,13 +191,17 @@ function createManager({ engine = loadEngine(config.sandboxMode), limits = {}, p
 
   function touch(sessionId) {
     const session = sessions.get(sessionId);
-    if (session) session.lastActiveAt = Date.now();
+    if (session) {
+      session.lastActiveAt = Date.now();
+      persist(session);
+    }
   }
 
   async function destroySession(sessionId, reason = 'stopped') {
     const session = sessions.get(sessionId);
     if (!session) return false;
     sessions.delete(sessionId);
+    unpersist(sessionId);
     metrics.sandboxesActive.set(sessions.size);
 
     for (const listener of session.closeListeners) listener(reason);
@@ -273,8 +306,49 @@ function createManager({ engine = loadEngine(config.sandboxMode), limits = {}, p
   }
 
   async function init() {
+    if (engine.reconcile) {
+      await engine.reconcile().catch((err) => {
+        logger.warn({ err: err.message }, 'could not reconcile running sandboxes');
+      });
+    }
+
+    const activeEngineIds = new Set();
+    try {
+      const store = require('../lib/store').getStore();
+      if (store) {
+        const stored = store.all(SESSIONS);
+        const now = Date.now();
+        for (const s of stored) {
+          const isExpired = (now - s.createdAt > settings.maxSessionMs) || (now - s.lastActiveAt > settings.maxIdleMs);
+          const alive = engine.isAlive ? engine.isAlive(s.engineId) : true;
+          if (!isExpired && alive) {
+            const restored = {
+              ...s,
+              closeListeners: new Set(),
+            };
+            sessions.set(s.sessionId, restored);
+            activeEngineIds.add(s.engineId);
+            if (engine.onExit) {
+              engine.onExit(s.engineId, () => {
+                destroySession(s.sessionId, 'exited').catch(() => {});
+              });
+            }
+          } else {
+            if (engine.destroy && alive) await engine.destroy(s.engineId).catch(() => {});
+            store.delete(SESSIONS, s.sessionId);
+          }
+        }
+        if (sessions.size > 0) {
+          logger.info({ count: sessions.size }, 'restored active student sessions after restart');
+          metrics.sandboxesActive.set(sessions.size);
+        }
+      }
+    } catch (err) {
+      logger.warn({ err: err.message }, 'could not restore sessions from store');
+    }
+
     if (engine.cleanupOrphans) {
-      const cleaned = await engine.cleanupOrphans().catch((err) => {
+      const cleaned = await engine.cleanupOrphans({ keepEngineIds: activeEngineIds }).catch((err) => {
         logger.warn({ err: err.message }, 'could not clean up orphaned sandboxes');
         return null;
       });

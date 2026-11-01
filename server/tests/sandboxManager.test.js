@@ -293,4 +293,22 @@ describe('session lifecycle', () => {
     expect(stats.claimLatencyMs.cold).toEqual({ samples: 0, p50: null, p95: null });
     expect(JSON.stringify(stats)).not.toContain(session.sessionId);
   });
+
+  test('init restores active unexpired sessions from the store', async () => {
+    const engine = fakeEngine();
+    const manager1 = managerWith(engine);
+    await manager1.init();
+    const session = await manager1.createSession('user-restored', 'k8s');
+
+    // Simulate process restart: create a new manager instance sharing the store and engine
+    const manager2 = managerWith(engine);
+    await manager2.init();
+
+    expect(manager2.getSession(session.sessionId)).toMatchObject({
+      sessionId: session.sessionId,
+      userId: 'user-restored',
+      labId: 'k8s',
+    });
+    expect(manager2.isOwner(session.sessionId, 'user-restored')).toBe(true);
+  });
 });

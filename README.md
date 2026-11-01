@@ -409,7 +409,11 @@ Two honest notes. Most of this was added after the workflow last ran on GitHub, 
 - **Put the gateway near its students.** Every terminal keystroke is a round trip to it. Measured from India, a gateway in Render's Oregon region took 0.3 to 1.1 s to answer a trivial request. Local echo hides that for typing, but command output still waits for the network.
 - **Render (`render.yaml`).** A demo deployment: sandboxes are PTY shells inside the gateway's container, and the free plan has no persistent disk. The blueprint asks for the Singapore region. Render cannot move an existing service, so changing region means creating new services from the blueprint and pointing `VITE_API_URL` at the new URL.
 - **Deploying only what passed CI.** By default Render and Vercel deploy every push to `main`, whether or not the checks passed. To gate it: create a Deploy Hook for each service (Render: service Settings, Deploy Hook; Vercel: project Settings, Git, Deploy Hooks), save the three URLs as repository secrets named `RENDER_HUB_DEPLOY_HOOK`, `RENDER_GATEWAY_DEPLOY_HOOK` and `VERCEL_DEPLOY_HOOK`, then switch off auto-deploy in Render and Vercel. The `deploy` job in CI then triggers them after every other job is green.
-- **A VM with Docker (`docker-compose.yml`).** The setup to use for real learners.
+- **A VM with Docker (`docker-compose.yml` or `docker-compose.prod.yml`).** The setup to use for real learners. For production on an AWS EC2 instance (Ubuntu 22.04 / 24.04 LTS), use the automated setup script:
+  ```bash
+  sudo ./scripts/deploy-ec2.sh
+  ```
+  This provisions the complete production stack with automatic Let's Encrypt TLS (Caddy), SQLite WAL persistence, container session reconciliation, and zero-exposure internal network isolation for the AI Hub. See full details in [docs/PRODUCTION_DEPLOYMENT.md](docs/PRODUCTION_DEPLOYMENT.md).
 - **Kubernetes (`k8s/`).** Runs the gateway unprivileged with PTY sandboxes inside the pod; a demo, for the same reason as Render. Create the secret from `k8s/secret.example.yaml` first.
 
 Optional gateway settings (all in `server/.env.example`):

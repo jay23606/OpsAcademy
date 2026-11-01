@@ -29,15 +29,36 @@ function pruneGuests() {
 }
 
 function start() {
-  const app = createApp();
-  const server = http.createServer(app);
+  const role = config.serviceRole;
   const manager = getManager();
+  let app = null;
+  let server = null;
+  let wss = null;
 
-  const wss = attachTerminalWebSocket(server, manager);
-  startReaper(manager);
+  if (role === 'terminal') {
+    server = http.createServer((req, res) => {
+      if (req.url === '/health' || req.url === '/api/health') {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        return res.end(JSON.stringify({ status: 'ok', service: 'opsacademy-terminal', uptime: process.uptime() }));
+      }
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.end('Terminal service only. Connect via WebSocket to /api/terminal');
+    });
+    wss = attachTerminalWebSocket(server, manager);
+    logger.info({ port: config.port, role }, 'OpsAcademy Terminal Service starting');
+  } else {
+    app = createApp();
+    server = http.createServer(app);
+    if (role === 'all') {
+      wss = attachTerminalWebSocket(server, manager);
+    }
+  }
 
-  pruneGuests();
-  setInterval(pruneGuests, GUEST_PRUNE_INTERVAL_MS).unref();
+  if (role !== 'terminal') {
+    startReaper(manager);
+    pruneGuests();
+    setInterval(pruneGuests, GUEST_PRUNE_INTERVAL_MS).unref();
+  }
 
   if (config.isProd && config.sandboxMode === 'pty') {
     logger.warn('SANDBOX_MODE=pty gives students a shell on this host with no isolation. Use SANDBOX_MODE=docker for untrusted users.');
@@ -46,7 +67,7 @@ function start() {
   manager.init().catch((err) => logger.warn({ err: err.message }, 'sandbox pool did not initialise'));
 
   server.listen(config.port, '0.0.0.0', () => {
-    logger.info({ port: config.port, sandboxMode: config.sandboxMode, env: config.env }, 'OpsAcademy API Gateway listening');
+    logger.info({ port: config.port, role, sandboxMode: config.sandboxMode, env: config.env }, 'OpsAcademy service listening');
   });
 
   // Stop taking requests, destroy every sandbox, flush the store, then exit.
@@ -54,14 +75,16 @@ function start() {
   async function shutdown(signal) {
     if (shuttingDown) return;
     shuttingDown = true;
-    logger.info({ signal }, 'shutting down');
+    logger.info({ signal, role }, 'shutting down');
 
     const force = setTimeout(() => process.exit(1), SHUTDOWN_TIMEOUT_MS);
     force.unref();
 
-    stopReaper();
+    if (role !== 'terminal') stopReaper();
     server.close();
-    for (const ws of wss.clients) ws.close(1001, 'Server shutting down');
+    if (wss) {
+      for (const ws of wss.clients) ws.close(1001, 'Server shutting down');
+    }
     await manager.shutdown().catch((err) => logger.warn({ err: err.message }, 'error destroying sandboxes'));
     getStore().flush();
     process.exit(0);
@@ -70,7 +93,7 @@ function start() {
   process.on('SIGTERM', () => shutdown('SIGTERM'));
   process.on('SIGINT', () => shutdown('SIGINT'));
 
-  return { app, server };
+  return { app, server, wss };
 }
 
 if (require.main === module) {
