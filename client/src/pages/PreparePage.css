@@ -1,12 +1,13 @@
 /* ═══════════════════════════════════════════════════════════════
-   Prepare Page Styles — Engineered Tech Theme
+   Prepare Page Styles — Light SaaS Theme
+   Cohesive with OpsAcademy Landing Page System
    ═══════════════════════════════════════════════════════════════ */
 
 .prepare-page {
   min-height: calc(100vh - 64px);
   padding-bottom: 80px;
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  background: #F8FAFC;
+  color: #0F172A;
 }
 
 .prepare-loading, .prepare-error {
@@ -16,14 +17,14 @@
   justify-content: center;
   min-height: calc(100vh - 64px);
   gap: 16px;
-  color: var(--text-muted);
+  color: #64748B;
 }
 
 .prepare-header {
-  background: rgba(11, 24, 19, 0.95);
-  border-bottom: 1px solid rgba(134, 239, 172, 0.14);
+  background: #FFFFFF;
+  border-bottom: 1px solid #E2E8F0;
   padding: 16px 0;
-  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
 }
 
 .prepare-header-inner {
@@ -42,14 +43,14 @@
   font-size: 0.72rem;
   font-weight: 800;
   text-transform: uppercase;
-  color: #bef264;
+  color: #2563EB;
   letter-spacing: 0.5px;
 }
 
 .prepare-header-title h1 {
   font-size: 1.35rem;
   font-weight: 800;
-  color: var(--text-bright);
+  color: #0F172A;
 }
 
 .prepare-mode-buttons {
@@ -66,7 +67,7 @@
 .prepare-tabs {
   display: flex;
   gap: 10px;
-  border-bottom: 1px solid rgba(134, 239, 172, 0.14);
+  border-bottom: 1px solid #E2E8F0;
   padding-bottom: 14px;
   margin-bottom: 32px;
   flex-wrap: wrap;
@@ -80,26 +81,26 @@
   font-family: var(--font-sans);
   font-size: 0.88rem;
   font-weight: 700;
-  background: rgba(14, 30, 22, 0.6);
-  border: 1.5px solid rgba(134, 239, 172, 0.2);
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
   border-radius: 9999px;
-  color: #c0ded0;
+  color: #64748B;
   cursor: pointer;
   transition: all var(--transition-fast);
 }
 
 .prepare-tab:hover {
-  color: #ffffff;
-  border-color: #bef264;
-  background: rgba(255, 255, 255, 0.08);
+  color: #0F172A;
+  border-color: #CBD5E1;
+  background: #F8FAFC;
 }
 
 .prepare-tab.active {
-  background: #bef264;
-  border-color: #bef264;
-  color: #0b2417;
+  background: #2563EB;
+  border-color: #2563EB;
+  color: #FFFFFF;
   font-weight: 800;
-  box-shadow: 0 2px 10px rgba(190, 242, 100, 0.3);
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.3);
 }
 
 /* Flashcards Section */
@@ -114,7 +115,7 @@
 .deck-progress {
   font-size: 0.82rem;
   font-weight: 700;
-  color: #bef264;
+  color: #2563EB;
   margin-bottom: 16px;
   font-family: var(--font-mono);
 }
@@ -135,9 +136,16 @@
 .question-card {
   padding: 0;
   overflow: hidden;
-  background: rgba(13, 30, 24, 0.78);
-  border: 1px solid rgba(134, 239, 172, 0.16);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all var(--transition-fast);
+}
+
+.question-card:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 .question-card-header {
@@ -153,9 +161,9 @@
   font-family: var(--font-mono);
   font-size: 0.85rem;
   font-weight: 800;
-  color: #bef264;
-  background: rgba(190, 242, 100, 0.14);
-  border: 1px solid rgba(190, 242, 100, 0.3);
+  color: #2563EB;
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
   padding: 4px 12px;
   border-radius: 9999px;
 }
@@ -164,7 +172,7 @@
   flex: 1;
   font-size: 1.05rem;
   font-weight: 700;
-  color: var(--text-bright);
+  color: #0F172A;
 }
 
 .question-card-body {
@@ -177,8 +185,8 @@
 .model-answer-box, .key-points-box {
   padding: 16px;
   border-radius: 12px;
-  background: rgba(10, 22, 17, 0.7);
-  border: 1px solid rgba(134, 239, 172, 0.14);
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
 }
 
 .box-label {
@@ -186,14 +194,14 @@
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: #bef264;
+  color: #2563EB;
   margin-bottom: 8px;
 }
 
 .model-answer-box p {
   font-size: 0.92rem;
   line-height: 1.6;
-  color: var(--text-primary);
+  color: #334155;
 }
 
 .key-points-list {
@@ -209,14 +217,14 @@
   font-weight: 600;
   padding: 4px 12px;
   border-radius: 9999px;
-  background: rgba(16, 185, 129, 0.12);
-  color: #86efac;
-  border: 1px solid rgba(74, 222, 128, 0.3);
+  background: #EFF6FF;
+  color: #1E40AF;
+  border: 1px solid #BFDBFE;
 }
 
 .empty-text {
   text-align: center;
-  color: var(--text-muted);
+  color: #64748B;
   padding: 40px;
 }
 

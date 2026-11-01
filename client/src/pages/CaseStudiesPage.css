@@ -1,12 +1,13 @@
 /* ═══════════════════════════════════════════════════════════════
-   OpsAcademy Dedicated Case Studies Hub Styles — Engineered Tech Theme
+   OpsAcademy Dedicated Case Studies Hub Styles — Light SaaS Theme
+   Cohesive with Landing Page System
    ═══════════════════════════════════════════════════════════════ */
 
 .case-studies-page {
   padding: 32px 0 80px;
   min-height: calc(100vh - 64px);
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  background: #F8FAFC;
+  color: #0F172A;
 }
 
 .case-studies-page .container {
@@ -18,13 +19,10 @@
 
 .case-studies-hero {
   padding: 2.8rem;
-  background: 
-    radial-gradient(ellipse at 80% 0%, rgba(16, 185, 129, 0.22), transparent 70%),
-    radial-gradient(circle at 10% 90%, rgba(190, 242, 100, 0.08), transparent 60%),
-    linear-gradient(180deg, #0d1e18 0%, #091410 100%);
-  border: 1px solid rgba(134, 239, 172, 0.2);
+  background: linear-gradient(135deg, #EFF6FF 0%, #FFFFFF 100%);
+  border: 1px solid #BFDBFE;
   border-radius: 24px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.06);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,25 +32,15 @@
   overflow: hidden;
 }
 
-.case-studies-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: 
-    radial-gradient(ellipse 70% 60% at 50% 0%, rgba(16, 185, 129, 0.16), transparent 70%),
-    radial-gradient(ellipse 50% 50% at 85% 50%, rgba(56, 189, 248, 0.10), transparent 65%);
-  pointer-events: none;
-}
-
 .badge-case-glow {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.35rem 0.85rem;
-  background: rgba(190, 242, 100, 0.14);
-  border: 1px solid rgba(190, 242, 100, 0.4);
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
   border-radius: 9999px;
-  color: #bef264;
+  color: #2563EB;
   font-size: 0.78rem;
   font-weight: 800;
   letter-spacing: 0.5px;
@@ -62,14 +50,14 @@
 .case-hero-title {
   font-size: 2.4rem;
   font-weight: 900;
-  color: #f2fde2;
+  color: #0F172A;
   line-height: 1.25;
   margin: 0 0 0.8rem 0;
   letter-spacing: -0.5px;
 }
 
 .case-hero-subtitle {
-  color: #c0ded0;
+  color: #64748B;
   font-size: 1.05rem;
   line-height: 1.6;
   margin: 0;
@@ -85,9 +73,10 @@
 
 .hero-stat-box {
   padding: 1rem 1.5rem;
-  background: rgba(14, 30, 22, 0.85);
-  border: 1px solid rgba(134, 239, 172, 0.22);
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
   border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -96,13 +85,13 @@
 .stat-num {
   font-size: 1.6rem;
   font-weight: 900;
-  color: #bef264;
+  color: #2563EB;
   font-family: var(--font-mono);
 }
 
 .stat-desc {
   font-size: 0.75rem;
-  color: #7a998b;
+  color: #64748B;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   font-weight: 600;
@@ -118,10 +107,16 @@
 
 .case-study-main-card {
   padding: 2.5rem;
-  background: rgba(13, 30, 24, 0.88);
-  border: 1.5px solid rgba(134, 239, 172, 0.2);
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
   border-radius: 24px;
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  transition: all var(--transition-smooth);
+}
+
+.case-study-main-card:hover {
+  border-color: #CBD5E1;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .card-top-meta {
@@ -137,10 +132,10 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.3rem 0.75rem;
-  background: rgba(192, 132, 252, 0.15);
-  border: 1px solid rgba(192, 132, 252, 0.35);
+  background: #FAF5FF;
+  border: 1px solid #E9D5FF;
   border-radius: 9999px;
-  color: #c084fc;
+  color: #7C3AED;
   font-size: 0.8rem;
   font-weight: 700;
 }
@@ -150,10 +145,10 @@
   align-items: center;
   gap: 0.4rem;
   padding: 0.3rem 0.75rem;
-  background: rgba(16, 185, 129, 0.15);
-  border: 1px solid rgba(74, 222, 128, 0.35);
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
   border-radius: 9999px;
-  color: #86efac;
+  color: #16A34A;
   font-size: 0.8rem;
   font-weight: 700;
 }
@@ -161,13 +156,13 @@
 .case-card-title {
   font-size: 1.9rem;
   font-weight: 900;
-  color: #f2fde2;
+  color: #0F172A;
   margin: 0 0 1rem 0;
   line-height: 1.3;
 }
 
 .case-card-summary {
-  color: #c0ded0;
+  color: #64748B;
   font-size: 1.05rem;
   line-height: 1.6;
   margin: 0 0 1.5rem 0;
@@ -182,18 +177,18 @@
 
 .case-tag-pill {
   padding: 0.3rem 0.85rem;
-  background: rgba(14, 30, 22, 0.8);
-  border: 1px solid rgba(134, 239, 172, 0.2);
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
   border-radius: 9999px;
-  color: #86efac;
+  color: #475569;
   font-size: 0.82rem;
   font-weight: 600;
 }
 
 .architecture-highlights-box {
   padding: 1.5rem;
-  background: rgba(10, 22, 17, 0.7);
-  border: 1px solid rgba(134, 239, 172, 0.14);
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
   border-radius: 16px;
   margin-bottom: 2rem;
 }
@@ -202,7 +197,7 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #f2fde2;
+  color: #0F172A;
   font-size: 1rem;
   font-weight: 800;
   margin: 0 0 1rem 0;
@@ -218,13 +213,13 @@
   display: flex;
   align-items: flex-start;
   gap: 0.6rem;
-  color: #c0ded0;
+  color: #475569;
   font-size: 0.9rem;
   line-height: 1.5;
 }
 
 .icon-cyan {
-  color: #bef264;
+  color: #2563EB;
   flex-shrink: 0;
   margin-top: 2px;
 }
@@ -233,4 +228,11 @@
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  .case-studies-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 }

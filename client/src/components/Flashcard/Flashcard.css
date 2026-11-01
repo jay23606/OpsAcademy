@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   Flashcard Component Styles — Engineered Tech Theme
+   Flashcard Component Styles — Clean Light SaaS Theme
    ═══════════════════════════════════════════════════════════════ */
 
 .flashcard-container {
@@ -35,16 +35,16 @@
 }
 
 .flashcard-front {
-  background: rgba(13, 30, 24, 0.88);
-  border: 1.5px solid rgba(134, 239, 172, 0.18);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 
 .flashcard-back {
-  background: rgba(17, 38, 29, 0.95);
-  border: 1.5px solid rgba(190, 242, 100, 0.45);
+  background: #EFF6FF;
+  border: 1.5px solid #BFDBFE;
   transform: rotateY(180deg);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5), 0 0 24px rgba(190, 242, 100, 0.2);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.1);
 }
 
 .flashcard-header {
@@ -60,22 +60,22 @@
   letter-spacing: 0.5px;
   padding: 3px 10px;
   border-radius: 9999px;
-  background: rgba(190, 242, 100, 0.14);
-  color: #bef264;
-  border: 1px solid rgba(190, 242, 100, 0.3);
+  background: #EFF6FF;
+  color: #2563EB;
+  border: 1px solid #BFDBFE;
   display: inline-flex;
   align-items: center;
   gap: 4px;
 }
 
 .flashcard-badge.answer {
-  background: rgba(16, 185, 129, 0.14);
-  color: #86efac;
-  border-color: rgba(74, 222, 128, 0.35);
+  background: #DCFCE7;
+  color: #16A34A;
+  border-color: #86EFAC;
 }
 
 .flip-hint-icon {
-  color: var(--text-muted);
+  color: #94A3B8;
 }
 
 .flashcard-content {
@@ -90,19 +90,21 @@
 .flashcard-front h3 {
   font-size: 1.15rem;
   font-weight: 700;
-  color: var(--text-bright);
+  color: #0F172A;
   line-height: 1.45;
 }
 
 .flashcard-back p {
   font-size: 0.95rem;
-  color: var(--text-primary);
+  color: #1E3A8A;
   line-height: 1.6;
-  white-space: pre-line;
 }
 
 .flashcard-footer {
-  font-size: 0.74rem;
-  color: var(--text-muted);
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  color: #64748B;
+  font-weight: 600;
 }

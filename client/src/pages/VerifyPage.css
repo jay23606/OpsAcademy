@@ -1,50 +1,51 @@
 /* ═══════════════════════════════════════════════════════════════
-   Verify Certificate Styles — Engineered Tech Theme
+   Verify Certificate Styles — Clean Light SaaS Theme
+   Cohesive with OpsAcademy Landing Page System
    ═══════════════════════════════════════════════════════════════ */
 
 .verify-card {
   max-width: 520px;
   justify-items: center;
   text-align: center;
-  background: rgba(13, 30, 24, 0.9);
-  border: 1.5px solid rgba(134, 239, 172, 0.22);
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
   border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
   padding: 36px;
 }
 
 .verify-card h1 {
   font-size: 22px;
   font-weight: 800;
-  color: var(--text-bright);
+  color: #0F172A;
 }
 
-.verify-ok { color: #4ade80; }
-.verify-bad { color: #f87171; }
+.verify-ok { color: #16A34A; }
+.verify-bad { color: #DC2626; }
 
 .verify-lead,
 .verify-note {
   font-size: 14px;
   line-height: 1.6;
-  color: var(--text-secondary);
+  color: #64748B;
 }
 
-.verify-note { font-size: 12px; color: var(--text-muted); }
+.verify-note { font-size: 12px; color: #94A3B8; }
 
 .verify-details {
   width: 100%;
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 8px 16px;
-  margin: 12px 0;
+  margin: 16px 0;
   padding: 18px;
   border-radius: 12px;
-  background: rgba(10, 22, 17, 0.8);
-  border: 1px solid rgba(134, 239, 172, 0.14);
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
   text-align: left;
   font-size: 14px;
 }
 
-.verify-details dt { color: #7a998b; }
-.verify-details dd { margin: 0; color: #f1f7f4; font-weight: 600; }
-.mono { font-family: var(--font-mono); color: #bef264; }
+.verify-details dt { color: #64748B; font-weight: 500; }
+.verify-details dd { margin: 0; color: #0F172A; font-weight: 600; }
+.mono { font-family: var(--font-mono); color: #2563EB; }

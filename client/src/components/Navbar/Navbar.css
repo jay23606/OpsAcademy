@@ -1,5 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════
-   OpsAcademy Navbar Styles — Disciplined Technical & SaaS Themes
+   OpsAcademy Navbar Styles — Unified Clean Light SaaS Theme
+   Cohesive across Marketing, Dashboard, Labs, Docs & All Routes
    ═══════════════════════════════════════════════════════════════ */
 
 .navbar {
@@ -9,10 +10,11 @@
   right: 0;
   width: 100%;
   z-index: 1000;
-  background: rgba(11, 18, 32, 0.96);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid #263449;
+  border-bottom: 1px solid #E2E8F0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
   padding: 0 24px;
 }
 
@@ -38,12 +40,12 @@
   width: 34px;
   height: 34px;
   border-radius: 9px;
-  background: #111827;
+  background: #0F172A;
   border: 1.5px solid #2563EB;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 12px rgba(37, 99, 235, 0.25);
+  box-shadow: 0 0 14px rgba(37, 99, 235, 0.25);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -63,8 +65,8 @@
 .navbar-brand-text {
   font-size: 1.35rem;
   font-weight: 900;
-  letter-spacing: 0.03em;
-  color: #F8FAFC;
+  letter-spacing: -0.02em;
+  color: #0F172A;
 }
 
 .navbar-brand-text span {
@@ -85,7 +87,7 @@
   align-items: center;
   gap: 6px;
   padding: 7px 16px;
-  color: #94A3B8;
+  color: #334155;
   font-size: 0.88rem;
   font-weight: 600;
   border-radius: 9999px;
@@ -95,8 +97,8 @@
 }
 
 .navbar-link:hover {
-  color: #FFFFFF;
-  background: rgba(255, 255, 255, 0.08);
+  color: #2563EB;
+  background: #EFF6FF;
 }
 
 .navbar-link.active {
@@ -116,7 +118,7 @@
 }
 
 .text-cyan {
-  color: #38BDF8;
+  color: #0284C7;
 }
 
 .navbar-actions {
@@ -132,16 +134,16 @@
   gap: 6px;
   padding: 5px 12px;
   border-radius: 9999px;
-  background: rgba(22, 163, 74, 0.12);
-  border: 1px solid rgba(34, 197, 94, 0.35);
-  color: #4ADE80;
+  background: #DCFCE7;
+  border: 1px solid #86EFAC;
+  color: #15803D;
   font-size: 0.74rem;
   font-weight: 700;
   letter-spacing: 0.2px;
 }
 
 .pulse-dot {
-  color: #22C55E;
+  color: #16A34A;
   animation: pulse 1.8s infinite;
 }
 
@@ -149,6 +151,98 @@
   0% { opacity: 0.4; transform: scale(0.9); }
   50% { opacity: 1; transform: scale(1.1); }
   100% { opacity: 0.4; transform: scale(0.9); }
+}
+
+.nav-telemetry-badge.offline {
+  color: #991B1B;
+  border-color: #FCA5A5;
+  background: #FEE2E2;
+}
+
+.nav-telemetry-badge.offline .pulse-dot {
+  color: #DC2626;
+  animation: none;
+}
+
+.nav-progress {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #0F172A;
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  padding: 4px 12px;
+  border-radius: 9999px;
+}
+
+.nav-progress span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.nav-progress span:first-child svg { color: #16A34A; }
+.nav-progress span:last-child svg { color: #D97706; }
+
+.nav-user {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-user-name {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0F172A;
+}
+
+/* Navbar button variants */
+.navbar-actions .btn-secondary {
+  background: #FFFFFF;
+  border: 1.5px solid #CBD5E1;
+  color: #0F172A;
+  border-radius: 9999px;
+  font-weight: 600;
+  padding: 7px 18px;
+  transition: all 0.2s ease;
+}
+
+.navbar-actions .btn-secondary:hover {
+  background: #F8FAFC;
+  border-color: #94A3B8;
+  transform: translateY(-1px);
+}
+
+.navbar-actions .btn-primary {
+  background: #2563EB;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 9999px;
+  font-weight: 700;
+  padding: 8px 20px;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+  transition: all 0.2s ease;
+}
+
+.navbar-actions .btn-primary:hover {
+  background: #1D4ED8;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.45);
+}
+
+.navbar-actions .btn-ghost {
+  color: #64748B;
+}
+
+.navbar-actions .btn-ghost:hover {
+  color: #0F172A;
+  background: #F1F5F9;
 }
 
 @media (max-width: 900px) {
@@ -163,158 +257,3 @@
     padding: 8px 10px;
   }
 }
-
-/* ── Live status, progress and account ────────────────────── */
-.nav-telemetry-badge.offline {
-  color: var(--text-muted);
-  border-color: var(--border-subtle);
-  background: rgba(248, 113, 113, 0.08);
-}
-
-.nav-telemetry-badge.offline .pulse-dot {
-  color: var(--accent-red);
-  animation: none;
-}
-
-.nav-progress {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 12px;
-  font-weight: 700;
-  color: #F8FAFC;
-  background: #111827;
-  border: 1px solid #263449;
-  padding: 4px 12px;
-  border-radius: 9999px;
-}
-
-.nav-progress span {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.nav-progress span:first-child svg { color: #22C55E; }
-.nav-progress span:last-child svg { color: #F59E0B; }
-
-.nav-user {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.nav-user-name {
-  max-width: 120px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-/* ═══════════════════════════════════════════════════════════════
-   Landing Page Navbar Overrides (Clean Light SaaS Theme)
-   Matches reference image: white bar, dark brand, blue accents,
-   light green pill telemetry badge, rounded CTA pills
-   ═══════════════════════════════════════════════════════════════ */
-body:has(.landing) .navbar {
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid #e2e8f0;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-}
-
-body:has(.landing) .navbar-logo {
-  background: #0f172a;
-  border: 1.5px solid #2563eb;
-  box-shadow: 0 0 14px rgba(37, 99, 235, 0.25);
-}
-
-body:has(.landing) .navbar-logo-prompt {
-  color: #38bdf8;
-}
-
-body:has(.landing) .navbar-brand-text {
-  color: #0f172a;
-}
-
-body:has(.landing) .navbar-brand-text span {
-  color: #2563eb;
-}
-
-body:has(.landing) .navbar-link {
-  color: #334155;
-}
-
-body:has(.landing) .navbar-link:hover {
-  color: #2563eb;
-  background: #eff6ff;
-}
-
-body:has(.landing) .navbar-link.active {
-  color: #ffffff;
-  background: #2563eb;
-  border-color: #2563eb;
-  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.3);
-}
-
-body:has(.landing) .navbar-link .text-lime {
-  color: #2563eb;
-}
-
-body:has(.landing) .nav-telemetry-badge {
-  background: #dcfce7;
-  border: 1px solid #86efac;
-  color: #15803d;
-  font-weight: 700;
-}
-
-body:has(.landing) .nav-telemetry-badge .pulse-dot {
-  color: #16a34a;
-}
-
-body:has(.landing) .navbar-actions .btn-secondary {
-  background: #ffffff;
-  border: 1.5px solid #cbd5e1;
-  color: #0f172a;
-  border-radius: 9999px;
-  font-weight: 600;
-  padding: 7px 18px;
-  transition: all 0.2s ease;
-}
-
-body:has(.landing) .navbar-actions .btn-secondary:hover {
-  background: #f8fafc;
-  border-color: #94a3b8;
-  transform: translateY(-1px);
-}
-
-body:has(.landing) .navbar-actions .btn-primary {
-  background: #2563eb;
-  color: #ffffff;
-  border: none;
-  border-radius: 9999px;
-  font-weight: 700;
-  padding: 8px 20px;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
-  transition: all 0.2s ease;
-}
-
-body:has(.landing) .navbar-actions .btn-primary:hover {
-  background: #1d4ed8;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(37, 99, 235, 0.45);
-}
-
-body:has(.landing) .navbar-actions .btn-ghost {
-  color: #64748b;
-}
-
-body:has(.landing) .navbar-actions .btn-ghost:hover {
-  color: #0f172a;
-  background: #f1f5f9;
-}
-

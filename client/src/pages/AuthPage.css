@@ -1,5 +1,6 @@
 /* ═══════════════════════════════════════════════════════════════
-   Auth Page Styles — Engineered Tech Theme
+   Auth Page Styles — Clean Light SaaS Theme
+   Cohesive with OpsAcademy Landing Page System
    ═══════════════════════════════════════════════════════════════ */
 
 .auth-page {
@@ -7,20 +8,20 @@
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 100px 20px 60px;
-  background: var(--bg-primary);
+  padding: 80px 20px 60px;
+  background: #F8FAFC;
 }
 
 .auth-card {
   width: 100%;
   max-width: 440px;
-  padding: 32px;
+  padding: 36px;
   display: grid;
-  gap: 18px;
-  background: rgba(13, 30, 24, 0.9);
-  border: 1.5px solid rgba(134, 239, 172, 0.22);
+  gap: 20px;
+  background: #FFFFFF;
+  border: 1.5px solid #E2E8F0;
   border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 24px rgba(190, 242, 100, 0.08);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
 }
 
 .auth-tabs {
@@ -29,8 +30,8 @@
   gap: 6px;
   padding: 4px;
   border-radius: 9999px;
-  background: rgba(10, 22, 17, 0.8);
-  border: 1px solid rgba(134, 239, 172, 0.14);
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
 }
 
 .auth-tab {
@@ -42,7 +43,7 @@
   border: 0;
   border-radius: 9999px;
   background: transparent;
-  color: var(--text-secondary);
+  color: #64748B;
   font-size: 13px;
   font-weight: 700;
   cursor: pointer;
@@ -50,20 +51,20 @@
 }
 
 .auth-tab:hover {
-  color: var(--text-bright);
+  color: #0F172A;
 }
 
 .auth-tab.active {
-  background: #bef264;
-  color: #0b2417;
+  background: #2563EB;
+  color: #FFFFFF;
   font-weight: 800;
-  box-shadow: 0 2px 10px rgba(190, 242, 100, 0.35);
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.3);
 }
 
 .auth-lead {
   font-size: 13px;
   line-height: 1.6;
-  color: var(--text-secondary);
+  color: #64748B;
 }
 
 .auth-field {
@@ -71,24 +72,33 @@
   gap: 6px;
   font-size: 12px;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: #475569;
 }
 
 .auth-field .input {
   width: 100%;
   border-radius: 10px;
+  background: #FFFFFF;
+  border: 1.5px solid #CBD5E1;
+  color: #0F172A;
+}
+
+.auth-field .input:focus {
+  border-color: #2563EB;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 .auth-error {
   padding: 10px 14px;
   border-radius: 10px;
-  background: rgba(248, 113, 113, 0.12);
-  border: 1px solid rgba(248, 113, 113, 0.3);
-  color: #fca5a5;
+  background: #FEE2E2;
+  border: 1px solid #FCA5A5;
+  color: #B91C1C;
   font-size: 13px;
 }
 
 .auth-submit {
   justify-content: center;
   margin-top: 4px;
+  border-radius: 9999px;
 }
