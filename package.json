@@ -1,0 +1,13 @@
+{
+  "name": "opsacademy",
+  "private": true,
+  "description": "OpsAcademy - Hands-on DevOps and Cloud Engineering Platform",
+  "scripts": {
+    "dev": "npm --prefix client run dev",
+    "dev:client": "npm --prefix client run dev",
+    "dev:server": "npm --prefix server run dev",
+    "build": "npm --prefix client run build",
+    "test": "npm --prefix server test && npm --prefix client test",
+    "e2e": "npm --prefix client run e2e"
+  }
+}
