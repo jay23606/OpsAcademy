@@ -27,7 +27,7 @@ const PATHWAYS = {
     title: '60-Day Placement Sprint',
     target: 'Cracking 8–14 LPA Campus Offers',
     subtitle: 'Starting from scratch? Zero panic. Master high-yield interview topics in 60 days.',
-    accent: '#bef264',
+    accent: '#2563eb',
     nodes: [
       {
         id: 'n1',
@@ -283,7 +283,7 @@ export default function CampusPlacementPathwayDiagram() {
                 y1="20"
                 x2="960"
                 y2="20"
-                stroke="rgba(74, 222, 128, 0.2)"
+                stroke="#263449"
                 strokeWidth="2"
               />
               <line

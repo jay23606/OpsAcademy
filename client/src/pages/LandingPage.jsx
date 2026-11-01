@@ -191,27 +191,8 @@ export default function LandingPage() {
 
               {/* Main Punchy Editorial Headline */}
               <h1 className="hero-editorial-headline hero-title">
-                <span className="headline-line">STOP MEMORIZING.</span>
-                <span className="headline-line">START CRACKING</span>
-                <span className="headline-line headline-line-highlight">
-                  {/* Decorative yellow chalk rays */}
-                  <svg className="chalk-burst-svg" viewBox="0 0 32 32" fill="none">
-                    <line x1="6" y1="20" x2="18" y2="15" stroke="#facc15" strokeWidth="3" strokeLinecap="round" />
-                    <line x1="4" y1="11" x2="16" y2="11" stroke="#facc15" strokeWidth="3" strokeLinecap="round" />
-                    <line x1="8" y1="3" x2="18" y2="7" stroke="#facc15" strokeWidth="3" strokeLinecap="round" />
-                  </svg>
-                  <span className="headline-text-commands">8–24 LPA OFFERS.</span>
-                  {/* Hand-drawn brush underline */}
-                  <svg className="chalk-underline-svg" viewBox="0 0 320 22" fill="none" preserveAspectRatio="none">
-                    <path
-                      d="M4 14 C 60 6, 170 17, 314 8 C 240 18, 130 16, 12 20"
-                      stroke="#facc15"
-                      strokeWidth="5.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
+                <span className="headline-line">Stop Memorizing.</span>
+                <span className="headline-line">Start Cracking <span className="headline-text-commands">8–24 LPA Offers.</span></span>
               </h1>
 
               {/* Description */}
@@ -321,7 +302,7 @@ export default function LandingPage() {
         <div className="container">
           <div className="blockers-header">
             <span className="blockers-kicker">THE 3 CAMPUS REALITIES WE SOLVED</span>
-            <h2 className="blockers-title">Why 90% of College Students Give Up on Cloud &amp; DevOps</h2>
+            <h2 className="blockers-title">Why Learning Cloud and DevOps Is Harder Than It Looks</h2>
             <p className="blockers-desc">
               Traditional college training gives students boring PPTs and expects them to practice on their own. Here is how OpsAcademy removes every excuse.
             </p>
@@ -827,11 +808,6 @@ export default function LandingPage() {
             <p className="sheet-subheadline mx-auto">
               Master the exact stacks and workflows top technology teams test for.
             </p>
-          </div>
-          <div className="career-track-stars">
-            <span className="career-star">✦</span>
-            <span className="career-star career-star-lg">★</span>
-            <span className="career-star">✦</span>
           </div>
 
           <div className="career-roles-grid">
