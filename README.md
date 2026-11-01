@@ -20,6 +20,7 @@ Every unit has three modes:
 - [Course catalogue](#course-catalogue)
 - [Technology stack](#technology-stack)
 - [Running it](#running-it)
+- [Production EC2 Deployment](#production-ec2-deployment)
 - [Tests and checks](#tests-and-checks)
 - [Deploying](#deploying)
 - [Limitations](#limitations)
@@ -56,17 +57,21 @@ Every unit has three modes:
 
 ```mermaid
 graph TB
-    subgraph Client["Client Tier"]
+    subgraph Client["Client Tier (React 19 SPA)"]
         UI["React 19 SPA (Vite + Nginx)"]
         TERM["xterm.js (Local Echo Predictor)"]
     end
 
-    subgraph Gateway["API Gateway (Node.js / Express)"]
+    subgraph Ingress["Edge Ingress (Caddy / Auto-TLS)"]
+        CADDY["Caddy Reverse Proxy (Ports 80 & 443)<br/>Let's Encrypt TLS + WebSocket Stream Handler"]
+    end
+
+    subgraph Gateway["API Gateway (Node.js 22 / Express)"]
         AUTH["Auth & Security (JWT, Rate Limiting, Helmet)"]
-        MGR["Sandbox Manager (Lifecycle, Limits, Reaper)"]
-        POOL["Pre-Warmed Sandbox Pool"]
+        MGR["Sandbox Manager (Lifecycle, Reconciliation, Limits, Reaper)"]
+        POOL["Pre-Warmed Sandbox Pool (Standby Containers)"]
         GUARD["Terminal Tripwire (Command Guard)"]
-        STORE[("Pluggable Data Store (JSON / SQLite)")]
+        STORE[("Data Store (SQLite WAL Mode in Prod / JSON)")]
         STREAM["SSE / Stream Relay"]
         METRICS["/metrics (Prometheus Exporter)"]
     end
@@ -77,7 +82,7 @@ graph TB
         PTY["PTY Engine (Local Shell, Development)"]
     end
 
-    subgraph Hub["AI Hub (Python / Flask / Gunicorn)"]
+    subgraph Hub["AI Hub (Python 3.11 / Flask / Gunicorn)"]
         A0["Abuse & Injection Scanner"]
         A1["Lab Assessor & Diagnostician"]
         A15["Container Filesystem Inspector"]
@@ -93,24 +98,28 @@ graph TB
         LLM_EXT["LLM Providers (Anthropic Claude / Groq)"]
     end
 
-    Client -->|"HTTPS + WSS"| Gateway
+    Client -->|"HTTPS + WSS"| CADDY
+    CADDY -->|"HTTP /assets, /*"| UI
+    CADDY -->|"/api/terminal (WSS)"| Gateway
+    CADDY -->|"/api/* (REST)"| Gateway
     MGR --> POOL
     POOL --> DOCKER
     DOCKER --> SIMS
     POOL --> PTY
-    Gateway -->|"REST + SSE (Shared Token)"| Hub
+    Gateway -->|"Internal Network (REST + SSE)"| Hub
     A3 -.-> LLM_EXT
     METRICS -.-> PROM
     PROM --> GRAF
 
     style Client fill:#0f172a,stroke:#0284c7,color:#f8fafc
+    style Ingress fill:#0f172a,stroke:#38bdf8,color:#f8fafc
     style Gateway fill:#0f172a,stroke:#6366f1,color:#f8fafc
     style Hub fill:#0f172a,stroke:#d97706,color:#f8fafc
     style Engines fill:#0f172a,stroke:#059669,color:#f8fafc
     style Monitoring fill:#0f172a,stroke:#10b981,color:#f8fafc
 ```
 
-The gateway is the only service the browser talks to. It owns every session, so each sandbox, terminal connection and hint request is tied to one authenticated identity (a guest token is issued on first visit; registering upgrades it in place and keeps the progress).
+The gateway owns every session, so each sandbox, terminal connection and hint request is tied to one authenticated identity (a guest token is issued on first visit; registering upgrades it in place and keeps the progress). In production, sessions are persisted in SQLite and reconciled with running Docker containers across restarts, ensuring students never lose an active lab session during redeploys.
 
 ---
 
@@ -352,12 +361,33 @@ Set `ANTHROPIC_API_KEY` (Claude) or `GROQ_API_KEY` (Groq) for the hub and raise 
 
 ---
 
+## Production EC2 Deployment
+
+OpsAcademy includes a production-ready automated deployment pipeline tuned for AWS EC2 instances (Ubuntu 22.04 / 24.04 LTS) with full container isolation:
+
+```bash
+git clone https://github.com/yashsrivastava1408/OpsAcademy.git
+cd OpsAcademy
+sudo ./scripts/deploy-ec2.sh
+```
+
+This single command provisions:
+- **Automatic TLS**: Caddy edge proxy issuing and renewing free Let's Encrypt certificates on ports 80/443.
+- **WebSocket Streaming**: Long-lived terminal tunnels with zero timeouts and low-latency keystroke echoes.
+- **Session Reconciliation**: Server restarts or deployments do not drop students' running containers; the orchestrator automatically re-attaches to live containers and restores shell states from SQLite (`store.db`).
+- **Network Isolation**: The AI Hub runs on an internal Docker network with zero public port exposure.
+- **Zero-Touch Boot**: Configures `opsacademy.service` in systemd for automatic startup on EC2 reboot.
+
+See the complete AWS instance sizing, security group configurations, and runbook in [docs/PRODUCTION_DEPLOYMENT.md](docs/PRODUCTION_DEPLOYMENT.md).
+
+---
+
 ## Tests and checks
 
 ```bash
 cd server
 npm run lint                              # oxlint
-npm test                                  # 311 tests, including real shells over node-pty
+npm test                                  # 312 tests, including real shells over node-pty
 npm run test:coverage                     # the same, and fails under the coverage floor in package.json
 npm audit --omit=dev --audit-level=high   # known vulnerabilities in what ships
 npm run labs:validate                     # structure of every unit
@@ -435,7 +465,7 @@ On the AI hub, `ANTHROPIC_API_KEY` or `GROQ_API_KEY` switches hint writing and i
 
 - **The Docker, Kubernetes and AWS labs use simulators, not the real tools.** They cover the commands the labs teach and refuse anything else with a clear message. They teach the workflow and the output; they are not a cluster.
 - **PTY mode is not a sandbox.** Do not expose it to people you do not trust. (Each PTY shell does get its own block of ports for the labs, so students no longer collide on `-p 8080:80`; that is convenience, not isolation.)
-- **One gateway process.** Sessions live in memory, and both stores (JSON file or SQLite) belong to a single process. Running several replicas needs a network database and an async store interface.
+- **Single-node gateway host.** Sessions are persisted in SQLite (`store.db`) and reconciled with running Docker containers across server restarts. The gateway supports process role separation via `SERVICE_ROLE=api|terminal|all` so WebSocket terminal streaming can be decoupled from the REST API. Multi-node clustering across multiple physical hosts requires a network database and distributed pub/sub.
 - **Email is not sent unless `RESEND_API_KEY` is set.** Without it, password-reset and confirmation links are only written to the server log (and returned by the API outside production so the flow can be tried). The Resend path has never been run against the real service.
 - **Typing lag depends on where the gateway runs.** Every keystroke is a round trip. Local echo hides it when the round trip is over 50 ms, but output still arrives at network speed; deploy the gateway near its students.
 - **Section-level retrieval is still imperfect.** With the embedding ranker the right section is ranked first only 61% of the time (in the top 3: 92%). Without it, on a small host, it is 55% and 75%.
