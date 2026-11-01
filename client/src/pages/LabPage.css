@@ -419,14 +419,105 @@
   color: #f87171;
 }
 
-@media (max-width: 768px) {
-  .lab-workspace {
-    flex-direction: column;
+/* ── Responsive ───────────────────────────────────────────── */
+/* Panel switch: only shown on narrow screens */
+.lab-panel-tabs { display: none; }
+
+@media (max-width: 900px) {
+  /* One panel at a time, chosen with the tabs, each using the full width. */
+  .lab-panel-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    flex-shrink: 0;
+    border-bottom: 1px solid rgba(134, 239, 172, 0.15);
+    background: rgba(11, 24, 19, 0.95);
   }
+
+  .lab-panel-tabs button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .lab-panel-tabs button.active {
+    color: #bef264;
+    border-bottom-color: #bef264;
+  }
+
+  .lab-workspace[data-panel='terminal'] .lab-instructions,
+  .lab-workspace[data-panel='instructions'] .lab-terminal {
+    display: none;
+  }
+
   .lab-instructions {
     width: 100%;
-    height: 40%;
     border-right: none;
-    border-bottom: 1px solid rgba(134, 239, 172, 0.14);
   }
+
+  .lab-terminal { padding: 6px; }
+
+  .lab-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 10px 12px;
+  }
+
+  .lab-header-right {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .lab-title { font-size: 1rem; }
+
+  .lab-closing-banner,
+  .lab-alert-banner { margin: 8px 12px !important; }
+
+  /* The inspector becomes a sheet along the bottom instead of a floating card. */
+  .floating-inspector {
+    left: 8px !important;
+    right: 8px;
+    top: auto !important;
+    bottom: 8px;
+    width: auto;
+    max-height: 55vh;
+  }
+
+  .inspector-minimized-pill {
+    left: auto !important;
+    right: 12px;
+    top: auto !important;
+    bottom: 12px;
+  }
+
+  .inspector-drag-handle { cursor: default; }
+
+  .mentor-chat-drawer {
+    left: 8px;
+    right: 8px;
+    width: auto;
+    top: auto;
+    height: 72vh;
+  }
+}
+
+/* ── Inline commands in task text ─────────────────────────── */
+.task-code {
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: rgba(190, 242, 100, 0.1);
+  border: 1px solid rgba(190, 242, 100, 0.25);
+  color: #bef264;
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  word-break: break-word;
 }

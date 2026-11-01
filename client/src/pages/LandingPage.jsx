@@ -179,33 +179,6 @@ export default function LandingPage() {
         <div className="hero-ambient-glow hero-glow-right" />
 
         <div className="hero-frame-canvas">
-          {/* Header Navigation Bar */}
-          <header className="hero-frame-navbar">
-            <Link to="/" className="hero-frame-brand">
-              <div className="hero-brand-badge">
-                <span className="hero-brand-prompt">{'>_'}</span>
-              </div>
-              <span className="hero-brand-text">OPSACADEMY</span>
-            </Link>
-
-            <nav className="hero-frame-navlinks">
-              <a href="#curriculum">Curriculum</a>
-              <a href="#practice-lab">Interactive Sandbox</a>
-              <a href="#career-tracks">Career Tracks</a>
-              <a href="#ai-mentor">AI Mentor</a>
-              <a href="#pricing">Pricing</a>
-            </nav>
-
-            <div className="hero-frame-nav-actions">
-              <Link to="/login" className="hero-nav-btn-signin">
-                Sign In <ArrowRight size={14} className="hero-nav-arrow" />
-              </Link>
-              <Link to="/dashboard" className="hero-nav-btn-getstarted">
-                Get Started <ArrowRight size={15} />
-              </Link>
-            </div>
-          </header>
-
           {/* Hero Main Content Split Grid */}
           <div className="hero-frame-grid">
             {/* Left Content Column */}
@@ -217,7 +190,7 @@ export default function LandingPage() {
               </div>
 
               {/* Main Punchy Editorial Headline */}
-              <h1 className="hero-editorial-headline">
+              <h1 className="hero-editorial-headline hero-title">
                 <span className="headline-line">STOP MEMORIZING.</span>
                 <span className="headline-line">START CRACKING</span>
                 <span className="headline-line headline-line-highlight">

@@ -169,7 +169,7 @@ export default function HeroCockpit() {
         const nextIdx = (scriptKeys.indexOf(curr) + 1) % scriptKeys.length;
         return scriptKeys[nextIdx];
       });
-    }, 7500);
+    }, 3200);
 
     return () => clearInterval(interval);
   }, [autoPlay]);
@@ -338,7 +338,7 @@ export default function HeroCockpit() {
                     <button
                       key={key}
                       type="button"
-                      className={`quick-chip ${selectedScript === key ? 'active' : ''}`}
+                      className={`quick-chip terminal-tab-btn ${selectedScript === key ? 'active' : ''}`}
                       onClick={() => {
                         setSelectedScript(key);
                         setAutoPlay(false);

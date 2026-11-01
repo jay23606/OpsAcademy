@@ -41,11 +41,6 @@ export default function Navbar() {
   const isActive = (path) => location.pathname === path ? 'active' : '';
   const engine = engineLabel(stats);
 
-  // The landing page has its own framed architectural header matching the hero design
-  if (location.pathname === '/') {
-    return null;
-  }
-
   return (
     <nav className="navbar">
       <div className="navbar-inner">
