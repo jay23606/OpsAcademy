@@ -18,11 +18,11 @@
   gap: 8px;
   padding: 8px 14px;
   border-radius: 12px;
-  background: rgba(13, 27, 21, 0.9);
+  background: rgba(255, 255, 255, 0.98);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(74, 222, 128, 0.35);
-  box-shadow: 0 12px 30px -4px rgba(0, 0, 0, 0.7), 0 0 20px -4px rgba(74, 222, 128, 0.2);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 12px 28px -4px rgba(15, 23, 42, 0.12), 0 4px 12px rgba(0, 0, 0, 0.04);
   z-index: 10;
   pointer-events: none;
   user-select: none;
@@ -58,7 +58,7 @@
 .satellite-title {
   font-size: 11px;
   font-weight: 700;
-  color: #f1f5f9;
+  color: #0f172a;
   line-height: 1.2;
 }
 
@@ -72,8 +72,8 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-  background: #bef264;
-  box-shadow: 0 0 10px #bef264;
+  background: #16a34a;
+  box-shadow: 0 0 10px #16a34a;
   animation: pulseDot 2s infinite ease-in-out;
 }
 
@@ -83,7 +83,7 @@
   width: 11px;
   height: 11px;
   border-radius: 50%;
-  border: 1px solid #bef264;
+  border: 1px solid #16a34a;
   animation: radarRing 2s infinite cubic-bezier(0, 0, 0.2, 1);
   pointer-events: none;
 }
@@ -98,18 +98,18 @@
   font-weight: 800;
   padding: 1px 5px;
   border-radius: 4px;
-  background: rgba(74, 222, 128, 0.18);
-  color: #4ade80;
-  border: 1px solid rgba(74, 222, 128, 0.4);
+  background: #dcfce7;
+  color: #15803d;
+  border: 1px solid #86efac;
 }
 
 /* ── Backlight Ambient Glow ── */
 .studio-backlight {
   position: absolute;
   inset: -20px;
-  background: radial-gradient(circle at 35% 25%, rgba(74, 222, 128, 0.24), transparent 60%),
-              radial-gradient(circle at 80% 75%, rgba(56, 189, 248, 0.18), transparent 55%),
-              radial-gradient(circle at 50% 90%, rgba(190, 242, 100, 0.15), transparent 50%);
+  background: radial-gradient(circle at 35% 25%, rgba(59, 130, 246, 0.24), transparent 60%),
+              radial-gradient(circle at 80% 75%, rgba(96, 165, 250, 0.2), transparent 55%),
+              radial-gradient(circle at 50% 90%, rgba(147, 197, 253, 0.16), transparent 50%);
   filter: blur(35px);
   z-index: 0;
   pointer-events: none;
@@ -120,15 +120,15 @@
 .studio-frame {
   position: relative;
   z-index: 1;
-  background: rgba(13, 27, 21, 0.94);
+  background: #0b1120;
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(74, 222, 128, 0.28);
+  border: 1px solid #1e293b;
   border-radius: 20px;
   box-shadow:
-    0 25px 60px -15px rgba(0, 0, 0, 0.85),
-    0 0 40px -10px rgba(74, 222, 128, 0.2),
-    inset 0 1px 1px rgba(255, 255, 255, 0.15);
+    0 25px 60px -15px rgba(15, 23, 42, 0.35),
+    0 0 40px -10px rgba(56, 189, 248, 0.15),
+    inset 0 1px 1px rgba(255, 255, 255, 0.12);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -137,11 +137,11 @@
 }
 
 .studio-frame:hover {
-  border-color: rgba(74, 222, 128, 0.45);
+  border-color: rgba(56, 189, 248, 0.45);
   box-shadow:
-    0 35px 75px -15px rgba(0, 0, 0, 0.9),
-    0 0 50px -5px rgba(74, 222, 128, 0.28),
-    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    0 35px 75px -15px rgba(15, 23, 42, 0.45),
+    0 0 50px -5px rgba(56, 189, 248, 0.25),
+    inset 0 1px 1px rgba(255, 255, 255, 0.18);
 }
 
 /* ── Animated Perimeter Glowing Border Beam ── */
@@ -154,8 +154,8 @@
     from 0deg at 50% 50%,
     transparent 0deg,
     transparent 280deg,
-    rgba(190, 242, 100, 0.8) 330deg,
-    rgba(74, 222, 128, 1) 360deg
+    rgba(56, 189, 248, 0.8) 330deg,
+    rgba(37, 99, 235, 1) 360deg
   );
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
@@ -193,8 +193,8 @@
   justify-content: space-between;
   gap: 10px;
   padding: 12px 16px;
-  background: rgba(9, 19, 15, 0.9);
-  border-bottom: 1px solid rgba(74, 222, 128, 0.15);
+  background: #090e17;
+  border-bottom: 1px solid #1e293b;
 }
 
 /* Traffic Control Dots */
@@ -248,13 +248,13 @@
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 5px 11px;
+  padding: 5px 12px;
   border-radius: 8px;
   font-family: var(--font-sans, Inter, sans-serif);
   font-size: 11.5px;
   font-weight: 500;
   color: #94a3b8;
-  background: rgba(18, 32, 24, 0.5);
+  background: rgba(30, 41, 59, 0.4);
   border: 1px solid rgba(255, 255, 255, 0.06);
   cursor: pointer;
   transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
@@ -263,16 +263,16 @@
 
 .studio-tab:hover {
   color: #f1f5f9;
-  border-color: rgba(74, 222, 128, 0.35);
-  background: rgba(18, 36, 26, 0.85);
+  border-color: rgba(56, 189, 248, 0.35);
+  background: rgba(30, 41, 59, 0.7);
   transform: translateY(-1px);
 }
 
 .studio-tab.active {
-  color: #bef264;
-  background: rgba(22, 45, 33, 0.95);
-  border-color: rgba(190, 242, 100, 0.45);
-  box-shadow: 0 0 14px -2px rgba(190, 242, 100, 0.25);
+  color: #ffffff;
+  background: #2563eb;
+  border-color: #2563eb;
+  box-shadow: 0 0 14px -2px rgba(37, 99, 235, 0.5);
   font-weight: 600;
 }
 
@@ -311,7 +311,7 @@
   font-size: 10px;
   font-weight: 600;
   color: #94a3b8;
-  background: rgba(18, 32, 24, 0.6);
+  background: rgba(30, 41, 59, 0.5);
   border: 1px solid rgba(255, 255, 255, 0.08);
   cursor: pointer;
   transition: all 0.18s ease;
@@ -319,13 +319,13 @@
 
 .studio-autoplay-btn:hover {
   color: #f1f5f9;
-  border-color: rgba(74, 222, 128, 0.3);
+  border-color: rgba(56, 189, 248, 0.3);
 }
 
 .studio-autoplay-btn.active {
-  color: #bef264;
-  background: rgba(190, 242, 100, 0.12);
-  border-color: rgba(190, 242, 100, 0.35);
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.15);
+  border-color: rgba(56, 189, 248, 0.4);
 }
 
 /* ── 2. Studio Viewport ── */
@@ -334,9 +334,7 @@
   z-index: 3;
   min-height: 380px;
   padding: 18px 20px;
-  background: radial-gradient(circle at 90% 10%, rgba(34, 197, 94, 0.05), transparent 50%),
-              radial-gradient(circle at 10% 90%, rgba(56, 189, 248, 0.04), transparent 50%),
-              #08120d;
+  background: #0b1120;
 }
 
 /* Fade In View Transition */
@@ -381,29 +379,29 @@
   font-size: 11px;
   font-weight: 500;
   color: #cbd5e1;
-  background: rgba(15, 23, 42, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .quick-chip:hover {
-  background: rgba(30, 58, 45, 0.85);
-  border-color: rgba(74, 222, 128, 0.35);
+  background: rgba(30, 41, 59, 0.95);
+  border-color: rgba(56, 189, 248, 0.35);
   color: #f1f5f9;
   transform: translateY(-1px);
 }
 
 .quick-chip.active {
-  background: rgba(22, 48, 34, 0.95);
-  border-color: rgba(190, 242, 100, 0.5);
-  color: #bef264;
-  box-shadow: 0 0 12px -2px rgba(190, 242, 100, 0.25);
+  background: rgba(37, 99, 235, 0.25);
+  border-color: #2563eb;
+  color: #93c5fd;
+  box-shadow: 0 0 12px -2px rgba(37, 99, 235, 0.35);
 }
 
 .terminal-code-canvas {
-  background: #050d09;
-  border: 1px solid rgba(74, 222, 128, 0.18);
+  background: #070d17;
+  border: 1px solid #1e293b;
   border-radius: 12px;
   padding: 14px 16px;
   font-family: var(--font-mono, 'JetBrains Mono', 'Fira Code', monospace);
@@ -1201,8 +1199,8 @@
   justify-content: space-between;
   gap: 12px;
   padding: 10px 16px;
-  background: rgba(9, 19, 15, 0.95);
-  border-top: 1px solid rgba(74, 222, 128, 0.15);
+  background: #090e17;
+  border-top: 1px solid #1e293b;
   overflow-x: auto;
 }
 
