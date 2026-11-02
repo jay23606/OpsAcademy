@@ -1,0 +1,283 @@
+/* ═══════════════════════════════════════════════════════════════
+   OpsAcademy Lab Portal Transition Screen
+   Aesthetic: Light SaaS Aurora Theme (matching Landing Page)
+   ═══════════════════════════════════════════════════════════════ */
+
+.lab-portal-stage {
+  position: relative;
+  min-height: calc(100vh - 64px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+  background: #f8fafc;
+  overflow: hidden;
+}
+
+/* Ambient glow orbs matching landing page */
+.portal-ambient-glow {
+  position: absolute;
+  border-radius: 9999px;
+  pointer-events: none;
+  filter: blur(100px);
+  opacity: 0.55;
+}
+
+.portal-glow-top {
+  top: -120px;
+  left: 20%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, rgba(59, 130, 246, 0.05) 70%, transparent 100%);
+}
+
+.portal-glow-bottom {
+  bottom: -150px;
+  right: 15%;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, rgba(99, 102, 241, 0.04) 70%, transparent 100%);
+}
+
+.portal-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 640px;
+}
+
+/* Main card */
+.portal-card {
+  background: rgba(255, 255, 255, 0.96);
+  backdrop-filter: blur(16px);
+  border: 1px solid #e2e8f0;
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 20px 45px -10px rgba(15, 23, 42, 0.08), 0 0 1px 1px rgba(226, 232, 240, 0.5);
+  text-align: center;
+}
+
+/* Badge Pill */
+.portal-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: 9999px;
+  margin-bottom: 20px;
+}
+
+.portal-pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: #2563eb;
+  box-shadow: 0 0 8px #2563eb;
+  animation: portalPulse 1.8s infinite ease-in-out;
+}
+
+@keyframes portalPulse {
+  0%, 100% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+
+.portal-badge-text {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #1e40af;
+  text-transform: uppercase;
+}
+
+/* Typography */
+.portal-title {
+  font-size: 2.15rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.03em;
+  margin: 0 0 12px 0;
+  line-height: 1.2;
+}
+
+.portal-subtitle {
+  font-size: 0.95rem;
+  color: #64748b;
+  line-height: 1.55;
+  margin: 0 auto 32px auto;
+  max-width: 520px;
+}
+
+/* Progress bar gauge */
+.portal-progress-wrapper {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 28px;
+  text-align: left;
+}
+
+.portal-progress-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.portal-progress-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.portal-spin-icon {
+  animation: portalSpin 1s linear infinite;
+  color: #2563eb;
+}
+
+@keyframes portalSpin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.portal-progress-percent {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+.portal-progress-bar-track {
+  width: 100%;
+  height: 8px;
+  background: #e2e8f0;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.portal-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2563eb, #38bdf8);
+  border-radius: 9999px;
+  transition: width 0.1s linear;
+  box-shadow: 0 0 10px rgba(37, 99, 235, 0.4);
+}
+
+/* Stepper checklist */
+.portal-stepper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.portal-step-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  background: transparent;
+}
+
+.portal-step-item.active {
+  background: #eff6ff;
+  border: 1px solid #dbeafe;
+}
+
+.portal-step-item.done {
+  opacity: 0.9;
+}
+
+.portal-step-item.pending {
+  opacity: 0.55;
+}
+
+.portal-step-icon-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  margin-top: 1px;
+}
+
+.portal-step-icon-wrap .step-icon {
+  color: #64748b;
+}
+
+.portal-step-item.active .step-icon {
+  color: #2563eb;
+}
+
+.portal-step-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.portal-step-label {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #1e293b;
+}
+
+.portal-step-detail {
+  font-size: 0.77rem;
+  color: #64748b;
+  font-family: 'JetBrains Mono', monospace;
+  margin-top: 2px;
+}
+
+/* Footer Action */
+.portal-footer {
+  display: flex;
+  justify-content: center;
+}
+
+.portal-enter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 0.94rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+  transition: all 0.2s ease;
+}
+
+.portal-enter-btn:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(37, 99, 235, 0.45);
+}
+
+@media (max-width: 640px) {
+  .portal-card {
+    padding: 28px 20px;
+    border-radius: 20px;
+  }
+  .portal-title {
+    font-size: 1.75rem;
+  }
+  .portal-subtitle {
+    font-size: 0.88rem;
+  }
+}

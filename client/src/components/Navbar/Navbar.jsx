@@ -112,8 +112,8 @@ export default function Navbar() {
             </Link>
           )}
 
-          <Link to="/dashboard" className="btn btn-primary btn-sm hide-mobile">
-            Start Learning
+          <Link to="/portal/lab" className="btn btn-primary btn-sm hide-mobile">
+            Go to Lab
           </Link>
         </div>
       </div>

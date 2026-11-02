@@ -200,16 +200,12 @@ export default function LandingPage() {
                 Every engineering student has a generic To-Do app on their resume. Stand out in campus placements by deploying real Docker containers, Kubernetes clusters, and AWS infrastructure inside browser sandboxes — Zero Credit Card Required. Runs on Any 4GB College PC.
               </p>
 
-              {/* Action Buttons */}
+              {/* Single Clear Action Button routing to Interactive Lab */}
               <div className="hero-editorial-ctas">
-                <Link to="/dashboard" className="hero-btn-pill-primary">
-                  <span>Start Practice Lab</span>
-                  <ArrowRight size={17} />
+                <Link to="/portal/lab" className="hero-btn-pill-primary hero-btn-single">
+                  <span>Go to Interactive Lab</span>
+                  <ArrowRight size={18} />
                 </Link>
-                <a href="#pathways" className="hero-btn-pill-secondary">
-                  <span>Explore Pathways</span>
-                  <ArrowRight size={17} />
-                </a>
               </div>
 
               {/* Trust Badges Checkmarks */}
@@ -1044,8 +1040,8 @@ export default function LandingPage() {
                 <p>Stop watching tutorials. Start typing real commands in live sandboxes.</p>
               </div>
             </div>
-            <Link to="/dashboard" className="ready-banner-btn">
-              Open Learning Dashboard <ArrowRight size={16} />
+            <Link to="/portal/lab" className="ready-banner-btn">
+              Go to Interactive Lab <ArrowRight size={16} />
             </Link>
           </div>
         </div>

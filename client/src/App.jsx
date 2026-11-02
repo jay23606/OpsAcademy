@@ -21,6 +21,7 @@ const pages = {
   admin: () => import('./pages/AdminPage'),
   resetPassword: () => import('./pages/ResetPasswordPage'),
   verifyEmail: () => import('./pages/VerifyEmailPage'),
+  labTransition: () => import('./pages/LabTransitionPage'),
 };
 
 const LandingPage = lazy(pages.landing);
@@ -37,6 +38,7 @@ const ProfilePage = lazy(pages.profile);
 const AdminPage = lazy(pages.admin);
 const ResetPasswordPage = lazy(pages.resetPassword);
 const VerifyEmailPage = lazy(pages.verifyEmail);
+const LabTransitionPage = lazy(pages.labTransition);
 
 /** The chunk for a URL, so it can start downloading before React renders. */
 function pageFor(pathname) {
@@ -52,6 +54,7 @@ function pageFor(pathname) {
   if (pathname.endsWith('/casestudy')) return pages.caseStudy;
   if (pathname.startsWith('/u/')) return pages.profile;
   if (pathname.startsWith('/admin')) return pages.admin;
+  if (pathname.startsWith('/portal/lab') || pathname.startsWith('/enter-lab')) return pages.labTransition;
   if (pathname.startsWith('/reset-password')) return pages.resetPassword;
   if (pathname.startsWith('/verify-email')) return pages.verifyEmail;
   return null;
@@ -124,6 +127,8 @@ function AppRoutes() {
           <Route path="/verify-email" element={<VerifyEmailPage />} />
           <Route path="/u/:slug" element={<ProfilePage />} />
           <Route path="/admin" element={<AdminPage />} />
+          <Route path="/portal/lab" element={<LabTransitionPage />} />
+          <Route path="/enter-lab" element={<LabTransitionPage />} />
           {/* Legacy route alias */}
           <Route path="/lab/:unitId" element={<LabPage />} />
           <Route path="*" element={<NotFoundPage />} />
