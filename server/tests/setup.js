@@ -13,6 +13,10 @@ delete process.env.ADMIN_TOKEN;
 delete process.env.METRICS_TOKEN;
 delete process.env.CORS_ORIGINS;
 delete process.env.CLIENT_URL;
+delete process.env.SUPABASE_URL;
+delete process.env.SUPABASE_KEY;
+delete process.env.SUPABASE_SECRET_KEY;
+delete process.env.SUPABASE_PUBLISHABLE_KEY;
 
 // Tests create many users and sandboxes from one address; the limiters get
 // their own tests with low limits.

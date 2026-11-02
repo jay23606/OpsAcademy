@@ -10,6 +10,7 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 const { getStore } = require('../lib/store');
+const { verifySupabaseToken } = require('../lib/supabaseAuth');
 
 function signToken(user) {
   return jwt.sign(
@@ -26,6 +27,25 @@ function verifyToken(token) {
   try {
     payload = jwt.verify(token, config.jwtSecret, { algorithms: ['HS256'] });
   } catch {
+    // If local verification fails, check if it's a Supabase token
+    const supabaseUser = verifySupabaseToken(token);
+    if (supabaseUser) {
+      try {
+        const store = getStore();
+        const existing = store.get('users', supabaseUser.id);
+        if (!existing) {
+          store.set('users', supabaseUser.id, {
+            id: supabaseUser.id,
+            name: supabaseUser.name,
+            email: supabaseUser.email,
+            guest: supabaseUser.guest,
+            emailVerified: supabaseUser.emailVerified,
+            createdAt: new Date().toISOString(),
+          });
+        }
+      } catch {}
+      return supabaseUser;
+    }
     return null;
   }
 

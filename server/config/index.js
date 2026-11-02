@@ -91,9 +91,14 @@ const config = {
   dailyChallenge: process.env.DAILY_CHALLENGE !== 'off',
 
   // Persistence. Set DATA_DIR to a mounted volume in production.
-  // STORE_DRIVER: 'sqlite' (default in production) or 'json' (default in development).
+  // STORE_DRIVER: 'supabase', 'sqlite' (default in production), or 'json' (default in development).
   dataDir: process.env.DATA_DIR || path.join(__dirname, '..', '.data'),
   storeDriver: (process.env.STORE_DRIVER || (isProd ? 'sqlite' : 'json')).toLowerCase(),
+
+  // Supabase
+  supabaseUrl: process.env.SUPABASE_URL || null,
+  supabasePublishableKey: process.env.SUPABASE_PUBLISHABLE_KEY || null,
+  supabaseSecretKey: process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_KEY || null,
 
   rateLimit: {
     windowMs: 60 * 1000,

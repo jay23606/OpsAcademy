@@ -104,6 +104,17 @@ let defaultStore = null;
 function createStore(config) {
   const jsonPath = path.join(config.dataDir, 'store.json');
   if (config.isTest) return new JsonStore(null);
+
+  if (config.storeDriver === 'supabase') {
+    const { SupabaseStore } = require('./supabaseStore');
+    const store = new SupabaseStore({
+      supabaseUrl: config.supabaseUrl,
+      supabaseKey: config.supabaseSecretKey || config.supabaseKey,
+    });
+    if (fs.existsSync(jsonPath)) store.importJson(jsonPath);
+    return store;
+  }
+
   if (config.storeDriver !== 'sqlite') return new JsonStore(jsonPath);
 
   const { SqliteStore } = require('./sqliteStore');
