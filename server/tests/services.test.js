@@ -457,6 +457,26 @@ describe('expired guests', () => {
   });
 });
 
+describe('leaderboard cache', () => {
+  test('saving progress does not force a rescan; the cache lasts one TTL', () => {
+    const { getStore } = require('../lib/store');
+    const learner = users.createGuest();
+    const start = Date.now();
+    progress.recordQuiz(learner.id, 'linux-basics', 'q1');
+    expect(progress.leaderboard(20, start)[0].xp).toBe(progress.XP.quiz);
+
+    const scan = jest.spyOn(getStore(), 'all');
+    progress.recordInterview(learner.id, 'linux-basics', 'q2', 100);
+    const cached = progress.leaderboard(20, start + 1000);
+    expect(scan).not.toHaveBeenCalled();
+    expect(cached[0].xp).toBe(progress.XP.quiz);
+
+    expect(progress.leaderboard(20, start + 15 * 1000)[0].xp).toBe(progress.XP.quiz + progress.XP.interview);
+    expect(scan).toHaveBeenCalledTimes(1);
+    scan.mockRestore();
+  });
+});
+
 describe('telemetry snapshot', () => {
   test('one command per snapshot, split back into files, processes and ports', async () => {
     const calls = [];

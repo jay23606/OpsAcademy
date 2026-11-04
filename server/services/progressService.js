@@ -77,7 +77,6 @@ function load(userId) {
 
 function save(doc) {
   getStore().set(PROGRESS, doc.userId, doc);
-  leaderboardCache = null;
 }
 
 function dayKey(timestamp) {
