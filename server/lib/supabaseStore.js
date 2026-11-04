@@ -18,8 +18,9 @@ class SupabaseStore {
    * @param {object} options
    * @param {string} options.supabaseUrl
    * @param {string} options.supabaseKey (Service role secret key)
+   * @param {string} [options.importPath] legacy store.json, imported once if the table is empty
    */
-  constructor({ supabaseUrl, supabaseKey } = {}) {
+  constructor({ supabaseUrl, supabaseKey, importPath = null } = {}) {
     const url = supabaseUrl || process.env.SUPABASE_URL;
     const key = supabaseKey || process.env.SUPABASE_SECRET_KEY || process.env.SUPABASE_KEY;
 
@@ -29,6 +30,7 @@ class SupabaseStore {
 
     this.url = url;
     this.key = key;
+    this.importPath = importPath;
     this.supabase = createClient(url, key, {
       auth: { persistSession: false, autoRefreshToken: false },
     });
@@ -60,6 +62,7 @@ class SupabaseStore {
           this.data[row.collection][row.id] = row.doc;
         }
         logger.info({ count: data.length }, '[SupabaseStore] Preloaded documents from Supabase');
+        if (data.length === 0 && this.importPath) await this.importOnce(this.importPath);
       }
 
       this.initialized = true;
@@ -178,49 +181,89 @@ class SupabaseStore {
     return !this.initError;
   }
 
-  /** Import existing records from store.json or an object */
+  /**
+   * Import store.json into an empty documents table, once. The file is renamed
+   * to store.json.importing first, so no later boot reads it as the trigger
+   * again. On success it becomes store.json.imported. On failure it is renamed
+   * back and the store reports an init error, so the next start retries.
+   * If the process dies mid-import, store.json.importing is left behind; the
+   * next start imports from it again, since the upsert is idempotent.
+   */
+  async importOnce(filePath) {
+    const claimed = `${filePath}.importing`;
+    if (!fs.existsSync(claimed)) {
+      if (!fs.existsSync(filePath)) return;
+      try {
+        fs.renameSync(filePath, claimed);
+      } catch (err) {
+        logger.error({ err: err.message }, '[SupabaseStore] Could not claim store.json; not imported');
+        return;
+      }
+    } else {
+      logger.warn({ claimed }, '[SupabaseStore] Resuming a one-time import that did not finish');
+    }
+
+    let imported;
+    try {
+      imported = await this.importJson(claimed);
+    } catch (err) {
+      logger.error({ err: err.message }, '[SupabaseStore] One-time import failed; store.json restored for the next start');
+      this.initError = err;
+      try {
+        fs.renameSync(claimed, filePath);
+      } catch (restoreErr) {
+        logger.error({ err: restoreErr.message, claimed }, '[SupabaseStore] Could not restore store.json; rename it back by hand');
+      }
+      return;
+    }
+
+    try {
+      fs.renameSync(claimed, `${filePath}.imported`);
+      logger.info({ imported, filePath }, '[SupabaseStore] One-time import complete');
+    } catch (err) {
+      logger.error({ err: err.message, claimed }, '[SupabaseStore] Imported, but could not rename the file; it is not read again');
+    }
+  }
+
+  /**
+   * Import existing records from a store.json path or an object. Throws if the
+   * file cannot be read or parsed, or if the upsert fails; nothing is cached then.
+   */
   async importJson(source) {
     let payload = null;
     if (typeof source === 'string' && fs.existsSync(source)) {
-      try {
-        payload = JSON.parse(fs.readFileSync(source, 'utf8'));
-      } catch (err) {
-        logger.warn({ err: err.message }, '[SupabaseStore] Could not read import file');
-        return 0;
-      }
+      payload = JSON.parse(fs.readFileSync(source, 'utf8'));
     } else if (typeof source === 'object') {
       payload = source;
     }
 
     if (!payload) return 0;
 
-    let imported = 0;
     const rows = [];
     for (const [col, items] of Object.entries(payload)) {
       if (typeof items === 'object' && items !== null) {
         for (const [id, doc] of Object.entries(items)) {
-          this.collection(col)[id] = structuredClone(doc);
           rows.push({
             collection: col,
             id: String(id),
             doc,
             updated_at: new Date().toISOString(),
           });
-          imported += 1;
         }
       }
     }
 
+    // A single upsert is one statement, so the import lands completely or not at all.
     if (rows.length > 0) {
-      const batchSize = 100;
-      for (let i = 0; i < rows.length; i += batchSize) {
-        const batch = rows.slice(i, i + batchSize);
-        await this.supabase.from('documents').upsert(batch);
-      }
-      logger.info({ imported }, '[SupabaseStore] Imported records to Supabase');
+      const { error } = await this.supabase.from('documents').upsert(rows);
+      if (error) throw new Error(error.message);
+      logger.info({ imported: rows.length }, '[SupabaseStore] Imported records to Supabase');
     }
 
-    return imported;
+    for (const row of rows) {
+      this.collection(row.collection)[row.id] = structuredClone(row.doc);
+    }
+    return rows.length;
   }
 }
 

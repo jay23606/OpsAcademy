@@ -451,6 +451,7 @@ Optional gateway settings (all in `server/.env.example`):
 | Variable | What it turns on | Without it |
 | :--- | :--- | :--- |
 | `STORE_DRIVER=sqlite` | One database row per document, in `DATA_DIR/store.db`. An existing `store.json` is imported on first start. | One JSON file, rewritten on every save |
+| `STORE_DRIVER=supabase`, `SUPABASE_URL`, `SUPABASE_SECRET_KEY` | Documents live in the Supabase `documents` table. A `store.json` is imported once, only while that table is empty, then renamed to `store.json.imported`; restarts never import it again. If an import is interrupted, the next start resumes from `store.json.importing`. | One JSON file, rewritten on every save |
 | `RESEND_API_KEY`, `MAIL_FROM` | Password-reset and confirmation emails are really sent | Links are only written to the server log |
 | `APP_URL` | The web app's address, used to build the links in those emails | `CLIENT_URL`, else `http://localhost:5173` |
 | `ADMIN_TOKEN` | The operator page at `/admin` and the `/api/admin` endpoints | Those endpoints answer 404 |

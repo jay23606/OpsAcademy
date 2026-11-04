@@ -107,12 +107,12 @@ function createStore(config) {
 
   if (config.storeDriver === 'supabase') {
     const { SupabaseStore } = require('./supabaseStore');
-    const store = new SupabaseStore({
+    // store.json is imported only into an empty cloud table, once; see SupabaseStore.init.
+    return new SupabaseStore({
       supabaseUrl: config.supabaseUrl,
       supabaseKey: config.supabaseSecretKey || config.supabaseKey,
+      importPath: jsonPath,
     });
-    if (fs.existsSync(jsonPath)) store.importJson(jsonPath);
-    return store;
   }
 
   if (config.storeDriver !== 'sqlite') return new JsonStore(jsonPath);
