@@ -13,6 +13,8 @@ const { createClient } = require('@supabase/supabase-js');
 const fs = require('fs');
 const logger = require('./logger');
 
+const PAGE_SIZE = 1000;
+
 class SupabaseStore {
   /**
    * @param {object} options
@@ -44,22 +46,40 @@ class SupabaseStore {
 
   async init() {
     try {
-      const { data, error } = await this.supabase
-        .from('documents')
-        .select('collection, id, doc');
+      // Supabase caps each response at a server-side row limit that can be below PAGE_SIZE,
+      // so advance by the rows actually returned and stop only on an empty page.
+      const rows = [];
+      let tableCount = null;
+      let from = 0;
+      for (;;) {
+        const { data, error, count } = await this.supabase
+          .from('documents')
+          .select('collection, id, doc', from === 0 ? { count: 'exact' } : undefined)
+          .order('collection', { ascending: true })
+          .order('id', { ascending: true })
+          .range(from, from + PAGE_SIZE - 1);
 
-      if (error) {
-        logger.error({ error: error.message }, '[SupabaseStore] Failed to load documents');
-        this.initError = error;
-        return false;
+        if (error) {
+          logger.error({ error: error.message }, '[SupabaseStore] Failed to load documents');
+          this.initError = error;
+          return false;
+        }
+
+        if (from === 0) tableCount = count ?? null;
+        const page = Array.isArray(data) ? data : [];
+        if (page.length === 0) break;
+        rows.push(...page);
+        from += page.length;
       }
 
-      if (Array.isArray(data)) {
-        for (const row of data) {
-          if (!this.data[row.collection]) this.data[row.collection] = {};
-          this.data[row.collection][row.id] = row.doc;
-        }
-        logger.info({ count: data.length }, '[SupabaseStore] Preloaded documents from Supabase');
+      for (const row of rows) {
+        if (!this.data[row.collection]) this.data[row.collection] = {};
+        this.data[row.collection][row.id] = row.doc;
+      }
+      logger.info({ count: rows.length, tableCount }, '[SupabaseStore] Preloaded documents from Supabase');
+      // The table is live, so a write or delete between pages can legitimately change the count.
+      if (tableCount !== null && tableCount !== rows.length) {
+        logger.warn({ count: rows.length, tableCount }, '[SupabaseStore] Loaded row count differs from table count');
       }
 
       this.initialized = true;
