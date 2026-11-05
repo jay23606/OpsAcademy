@@ -13,6 +13,7 @@ const metrics = require('../lib/metrics');
 const { createPool } = require('./sandboxPoolService');
 
 const LATENCY_SAMPLES = 200;
+const PERSIST_INTERVAL_MS = 30 * 1000;
 
 class SandboxError extends Error {
   constructor(message, statusCode) {
@@ -50,6 +51,7 @@ function createManager({ engine = loadEngine(config.sandboxMode), limits = {}, p
   const SESSIONS = 'sessions';
 
   function persist(session) {
+    session.persistedAt = Date.now();
     try {
       const store = require('../lib/store').getStore();
       if (store) {
@@ -189,12 +191,17 @@ function createManager({ engine = loadEngine(config.sandboxMode), limits = {}, p
     return null;
   }
 
+  /**
+   * Record activity. Keystrokes only update the in-memory timestamp; the
+   * store is written at most once per PERSIST_INTERVAL_MS, so typing does not
+   * cost a write per character. Idle reaping reads the in-memory value.
+   */
   function touch(sessionId) {
     const session = sessions.get(sessionId);
-    if (session) {
-      session.lastActiveAt = Date.now();
-      persist(session);
-    }
+    if (!session) return;
+    const now = Date.now();
+    session.lastActiveAt = now;
+    if (now - (session.persistedAt || 0) >= PERSIST_INTERVAL_MS) persist(session);
   }
 
   async function destroySession(sessionId, reason = 'stopped') {
@@ -253,6 +260,7 @@ function createManager({ engine = loadEngine(config.sandboxMode), limits = {}, p
     if (!session) return;
     session.history.push({ command, at: Date.now() });
     if (session.history.length > settings.historyLimit) session.history.shift();
+    persist(session);
   }
 
   function getHistory(sessionId) {

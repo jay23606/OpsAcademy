@@ -246,6 +246,28 @@ describe('session lifecycle', () => {
     expect(manager.listSessions()).toEqual([]);
   });
 
+  test('typing does not write the store on every keystroke; activity is throttled', async () => {
+    const store = require('../lib/store');
+    const writes = { set: 0 };
+    const fakeStore = { set: () => { writes.set += 1; }, delete: () => {} };
+    const spy = jest.spyOn(store, 'getStore').mockReturnValue(fakeStore);
+    try {
+      const limits = { maxPerUser: 5, maxIdleMs: 15 * 60000, maxSessionMs: 120 * 60000 };
+      const manager = managerWith(fakeEngine(), { limits });
+      const session = await manager.createSession('user-1');
+      writes.set = 0;
+
+      for (let i = 0; i < 1000; i += 1) manager.touch(session.sessionId);
+      expect(writes.set).toBeLessThanOrEqual(1);
+
+      // Idle reaping still sees the in-memory timestamp.
+      const later = Date.now() + 16 * 60000;
+      expect(await manager.sweep(later)).toEqual([{ sessionId: session.sessionId, reason: 'idle' }]);
+    } finally {
+      spy.mockRestore();
+    }
+  });
+
   test('command history is kept per session and capped', async () => {
     const manager = managerWith(fakeEngine(), { limits: { historyLimit: 3 } });
     const session = await manager.createSession('user-1');
