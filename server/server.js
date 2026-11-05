@@ -86,7 +86,11 @@ function start() {
       for (const ws of wss.clients) ws.close(1001, 'Server shutting down');
     }
     await manager.shutdown().catch((err) => logger.warn({ err: err.message }, 'error destroying sandboxes'));
-    getStore().flush();
+    try {
+      await getStore().flush();
+    } catch (err) {
+      logger.warn({ err: err.message }, 'error flushing store');
+    }
     process.exit(0);
   }
 
